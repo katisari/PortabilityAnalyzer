@@ -23,7 +23,7 @@ class MainViewModel:ViewModelBase
             }
         }
 
-     //hello :)
+     
 
     public MainViewModel()
     {
@@ -47,6 +47,7 @@ class MainViewModel:ViewModelBase
 
         
         var dialog = new Microsoft.Win32.OpenFileDialog();
+        dialog.InitialDirectory = @"C:\";
         dialog.ShowDialog();
 
         SelectedPath = dialog.FileName;
