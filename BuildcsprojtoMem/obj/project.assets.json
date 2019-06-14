@@ -1,0 +1,523 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.7.2": {
+      "Microsoft.Build/16.0.461": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Build.Framework": "16.0.461",
+          "Microsoft.VisualStudio.Setup.Configuration.Interop": "1.16.30",
+          "System.Collections.Immutable": "1.5.0",
+          "System.Threading.Tasks.Dataflow": "4.5.24"
+        },
+        "compile": {
+          "lib/net472/Microsoft.Build.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.Build.Framework/16.0.461": {
+        "type": "package",
+        "compile": {
+          "lib/net472/Microsoft.Build.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.Build.Locator/1.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net46/Microsoft.Build.Locator.dll": {}
+        },
+        "runtime": {
+          "lib/net46/Microsoft.Build.Locator.dll": {}
+        },
+        "build": {
+          "build/Microsoft.Build.Locator.props": {},
+          "build/Microsoft.Build.Locator.targets": {}
+        }
+      },
+      "Microsoft.Build.Utilities.Core/16.0.461": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Build.Framework": "16.0.461",
+          "Microsoft.VisualStudio.Setup.Configuration.Interop": "1.16.30",
+          "System.Collections.Immutable": "1.5.0"
+        },
+        "compile": {
+          "lib/net472/Microsoft.Build.Utilities.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.VisualStudio.Setup.Configuration.Interop/1.16.30": {
+        "type": "package",
+        "compile": {
+          "lib/net35/Microsoft.VisualStudio.Setup.Configuration.Interop.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "System.Collections.Immutable/1.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
+      "System.Threading.Tasks.Dataflow/4.5.24": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+win8+wpa81/System.Threading.Tasks.Dataflow.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win8+wpa81/_._": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win": {
+      "Microsoft.Build/16.0.461": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Build.Framework": "16.0.461",
+          "Microsoft.VisualStudio.Setup.Configuration.Interop": "1.16.30",
+          "System.Collections.Immutable": "1.5.0",
+          "System.Threading.Tasks.Dataflow": "4.5.24"
+        },
+        "compile": {
+          "lib/net472/Microsoft.Build.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.Build.Framework/16.0.461": {
+        "type": "package",
+        "compile": {
+          "lib/net472/Microsoft.Build.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.Build.Locator/1.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net46/Microsoft.Build.Locator.dll": {}
+        },
+        "runtime": {
+          "lib/net46/Microsoft.Build.Locator.dll": {}
+        },
+        "build": {
+          "build/Microsoft.Build.Locator.props": {},
+          "build/Microsoft.Build.Locator.targets": {}
+        }
+      },
+      "Microsoft.Build.Utilities.Core/16.0.461": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Build.Framework": "16.0.461",
+          "Microsoft.VisualStudio.Setup.Configuration.Interop": "1.16.30",
+          "System.Collections.Immutable": "1.5.0"
+        },
+        "compile": {
+          "lib/net472/Microsoft.Build.Utilities.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.VisualStudio.Setup.Configuration.Interop/1.16.30": {
+        "type": "package",
+        "compile": {
+          "lib/net35/Microsoft.VisualStudio.Setup.Configuration.Interop.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "System.Collections.Immutable/1.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
+      "System.Threading.Tasks.Dataflow/4.5.24": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+win8+wpa81/System.Threading.Tasks.Dataflow.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win8+wpa81/_._": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win-x64": {
+      "Microsoft.Build/16.0.461": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Build.Framework": "16.0.461",
+          "Microsoft.VisualStudio.Setup.Configuration.Interop": "1.16.30",
+          "System.Collections.Immutable": "1.5.0",
+          "System.Threading.Tasks.Dataflow": "4.5.24"
+        },
+        "compile": {
+          "lib/net472/Microsoft.Build.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.Build.Framework/16.0.461": {
+        "type": "package",
+        "compile": {
+          "lib/net472/Microsoft.Build.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.Build.Locator/1.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net46/Microsoft.Build.Locator.dll": {}
+        },
+        "runtime": {
+          "lib/net46/Microsoft.Build.Locator.dll": {}
+        },
+        "build": {
+          "build/Microsoft.Build.Locator.props": {},
+          "build/Microsoft.Build.Locator.targets": {}
+        }
+      },
+      "Microsoft.Build.Utilities.Core/16.0.461": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Build.Framework": "16.0.461",
+          "Microsoft.VisualStudio.Setup.Configuration.Interop": "1.16.30",
+          "System.Collections.Immutable": "1.5.0"
+        },
+        "compile": {
+          "lib/net472/Microsoft.Build.Utilities.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.VisualStudio.Setup.Configuration.Interop/1.16.30": {
+        "type": "package",
+        "compile": {
+          "lib/net35/Microsoft.VisualStudio.Setup.Configuration.Interop.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "System.Collections.Immutable/1.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
+      "System.Threading.Tasks.Dataflow/4.5.24": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+win8+wpa81/System.Threading.Tasks.Dataflow.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win8+wpa81/_._": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win-x86": {
+      "Microsoft.Build/16.0.461": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Build.Framework": "16.0.461",
+          "Microsoft.VisualStudio.Setup.Configuration.Interop": "1.16.30",
+          "System.Collections.Immutable": "1.5.0",
+          "System.Threading.Tasks.Dataflow": "4.5.24"
+        },
+        "compile": {
+          "lib/net472/Microsoft.Build.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.Build.Framework/16.0.461": {
+        "type": "package",
+        "compile": {
+          "lib/net472/Microsoft.Build.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.Build.Locator/1.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net46/Microsoft.Build.Locator.dll": {}
+        },
+        "runtime": {
+          "lib/net46/Microsoft.Build.Locator.dll": {}
+        },
+        "build": {
+          "build/Microsoft.Build.Locator.props": {},
+          "build/Microsoft.Build.Locator.targets": {}
+        }
+      },
+      "Microsoft.Build.Utilities.Core/16.0.461": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Build.Framework": "16.0.461",
+          "Microsoft.VisualStudio.Setup.Configuration.Interop": "1.16.30",
+          "System.Collections.Immutable": "1.5.0"
+        },
+        "compile": {
+          "lib/net472/Microsoft.Build.Utilities.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net472/_._": {}
+        }
+      },
+      "Microsoft.VisualStudio.Setup.Configuration.Interop/1.16.30": {
+        "type": "package",
+        "compile": {
+          "lib/net35/Microsoft.VisualStudio.Setup.Configuration.Interop.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "System.Collections.Immutable/1.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
+      "System.Threading.Tasks.Dataflow/4.5.24": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+win8+wpa81/System.Threading.Tasks.Dataflow.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win8+wpa81/_._": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.Build/16.0.461": {
+      "sha512": "dbTDu5PVxSmWuZYd5bAnuv+VUkOvjsYJC8q5GazzNKZGB3R2lSPtBeP2VgnEBZEOKChpEgKxaisAVqIbX6XfTQ==",
+      "type": "package",
+      "path": "microsoft.build/16.0.461",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/Microsoft.Build.dll",
+        "lib/net472/Microsoft.Build.pdb",
+        "lib/net472/Microsoft.Build.xml",
+        "lib/netcoreapp2.1/Microsoft.Build.dll",
+        "lib/netcoreapp2.1/Microsoft.Build.pdb",
+        "lib/netcoreapp2.1/Microsoft.Build.xml",
+        "microsoft.build.16.0.461.nupkg.sha512",
+        "microsoft.build.nuspec",
+        "notices/THIRDPARTYNOTICES.txt"
+      ]
+    },
+    "Microsoft.Build.Framework/16.0.461": {
+      "sha512": "A7krf1sxJn7BsQDz5qHU8QLMu55JaZkF7bfNYP3EVlzi4IbEArnMBCuNP9gR93LpT2XdCBzSBtXc50m6u2N9Kw==",
+      "type": "package",
+      "path": "microsoft.build.framework/16.0.461",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/Microsoft.Build.Framework.dll",
+        "lib/net472/Microsoft.Build.Framework.pdb",
+        "lib/net472/Microsoft.Build.Framework.xml",
+        "lib/netstandard2.0/Microsoft.Build.Framework.dll",
+        "lib/netstandard2.0/Microsoft.Build.Framework.pdb",
+        "lib/netstandard2.0/Microsoft.Build.Framework.xml",
+        "microsoft.build.framework.16.0.461.nupkg.sha512",
+        "microsoft.build.framework.nuspec",
+        "notices/THIRDPARTYNOTICES.txt"
+      ]
+    },
+    "Microsoft.Build.Locator/1.2.2": {
+      "sha512": "tke8qeM7s23iapuxatU131tK89kdlOFZvDJ4IrX9pHJIiTPwjJO0Euw5/cSM6N8W2Q/NY/NEfJYoMFmBnbCUwQ==",
+      "type": "package",
+      "path": "microsoft.build.locator/1.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Microsoft.Build.Locator.props",
+        "build/Microsoft.Build.Locator.targets",
+        "lib/net46/Microsoft.Build.Locator.dll",
+        "lib/netcoreapp2.0/Microsoft.Build.Locator.dll",
+        "microsoft.build.locator.1.2.2.nupkg.sha512",
+        "microsoft.build.locator.nuspec"
+      ]
+    },
+    "Microsoft.Build.Utilities.Core/16.0.461": {
+      "sha512": "1CBsIGirCn4iu/2P2bh1sbbuREJ+RziwQyexQx4n2qIVgrxGb6CNLJun4jW8SG4PRoIeoQvY+VdhhHzxRscQQA==",
+      "type": "package",
+      "path": "microsoft.build.utilities.core/16.0.461",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/Microsoft.Build.Utilities.Core.dll",
+        "lib/net472/Microsoft.Build.Utilities.Core.pdb",
+        "lib/net472/Microsoft.Build.Utilities.Core.xml",
+        "lib/netstandard2.0/Microsoft.Build.Utilities.Core.dll",
+        "lib/netstandard2.0/Microsoft.Build.Utilities.Core.pdb",
+        "lib/netstandard2.0/Microsoft.Build.Utilities.Core.xml",
+        "microsoft.build.utilities.core.16.0.461.nupkg.sha512",
+        "microsoft.build.utilities.core.nuspec",
+        "notices/THIRDPARTYNOTICES.txt"
+      ]
+    },
+    "Microsoft.VisualStudio.Setup.Configuration.Interop/1.16.30": {
+      "sha512": "lC6SqNkraWUSY7cyF5GUmXSECoTMwslBc/r1dguChjsi0D0BlF7G6PLsvXD0NFCwnpKlgVzUYrIq7DQakdGerw==",
+      "type": "package",
+      "path": "microsoft.visualstudio.setup.configuration.interop/1.16.30",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/Microsoft.VisualStudio.Setup.Configuration.Interop.dll",
+        "lib/net35/Microsoft.VisualStudio.Setup.Configuration.Interop.xml",
+        "microsoft.visualstudio.setup.configuration.interop.1.16.30.nupkg.sha512",
+        "microsoft.visualstudio.setup.configuration.interop.nuspec"
+      ]
+    },
+    "System.Collections.Immutable/1.5.0": {
+      "sha512": "EXKiDFsChZW0RjrZ4FYHu9aW6+P4MCgEDCklsVseRfhoO0F+dXeMSsMRAlVXIo06kGJ/zv+2w1a2uc2+kxxSaQ==",
+      "type": "package",
+      "path": "system.collections.immutable/1.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netstandard1.0/System.Collections.Immutable.dll",
+        "lib/netstandard1.0/System.Collections.Immutable.xml",
+        "lib/netstandard1.3/System.Collections.Immutable.dll",
+        "lib/netstandard1.3/System.Collections.Immutable.xml",
+        "lib/netstandard2.0/System.Collections.Immutable.dll",
+        "lib/netstandard2.0/System.Collections.Immutable.xml",
+        "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll",
+        "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.xml",
+        "system.collections.immutable.1.5.0.nupkg.sha512",
+        "system.collections.immutable.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Threading.Tasks.Dataflow/4.5.24": {
+      "sha512": "xE/T1IX6nUYwNvoh8F2xFwHtKlFf/fhAAUpdNmSQINnMT7CL/cEWvvQYEXqZ2cfEtRpucp50ZhoLWC3MtPMfYg==",
+      "type": "package",
+      "path": "system.threading.tasks.dataflow/4.5.24",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License-Stable.rtf",
+        "lib/portable-net45+win8+wp8+wpa81/System.Threading.Tasks.Dataflow.dll",
+        "lib/portable-net45+win8+wp8+wpa81/system.threading.tasks.dataflow.xml",
+        "lib/portable-net45+win8+wpa81/System.Threading.Tasks.Dataflow.dll",
+        "lib/portable-net45+win8+wpa81/system.threading.tasks.dataflow.xml",
+        "system.threading.tasks.dataflow.4.5.24.nupkg.sha512",
+        "system.threading.tasks.dataflow.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.7.2": [
+      "Microsoft.Build >= 16.0.461",
+      "Microsoft.Build.Framework >= 16.0.461",
+      "Microsoft.Build.Locator >= 1.2.2",
+      "Microsoft.Build.Utilities.Core >= 16.0.461"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\t-lilawr\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\t-lilawr\\source\\repos\\BuildcsprojtoMem\\BuildcsprojtoMem.csproj",
+      "projectName": "BuildcsprojtoMem",
+      "projectPath": "C:\\Users\\t-lilawr\\source\\repos\\BuildcsprojtoMem\\BuildcsprojtoMem.csproj",
+      "packagesPath": "C:\\Users\\t-lilawr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\t-lilawr\\source\\repos\\BuildcsprojtoMem\\obj\\",
+      "projectStyle": "PackageReference",
+      "skipContentFileWrite": true,
+      "configFilePaths": [
+        "C:\\Users\\t-lilawr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net472"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net472": {
+          "projectReferences": {}
+        }
+      }
+    },
+    "frameworks": {
+      "net472": {
+        "dependencies": {
+          "Microsoft.Build": {
+            "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "target": "Package",
+            "version": "[16.0.461, )"
+          },
+          "Microsoft.Build.Framework": {
+            "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "target": "Package",
+            "version": "[16.0.461, )"
+          },
+          "Microsoft.Build.Locator": {
+            "target": "Package",
+            "version": "[1.2.2, )"
+          },
+          "Microsoft.Build.Utilities.Core": {
+            "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "target": "Package",
+            "version": "[16.0.461, )"
+          }
+        }
+      }
+    },
+    "runtimes": {
+      "win": {
+        "#import": []
+      },
+      "win-x64": {
+        "#import": []
+      },
+      "win-x86": {
+        "#import": []
+      }
+    }
+  }
+}

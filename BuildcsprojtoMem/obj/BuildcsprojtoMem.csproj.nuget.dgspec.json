@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\t-lilawr\\source\\repos\\BuildcsprojtoMem\\BuildcsprojtoMem.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\t-lilawr\\source\\repos\\BuildcsprojtoMem\\BuildcsprojtoMem.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\t-lilawr\\source\\repos\\BuildcsprojtoMem\\BuildcsprojtoMem.csproj",
+        "projectName": "BuildcsprojtoMem",
+        "projectPath": "C:\\Users\\t-lilawr\\source\\repos\\BuildcsprojtoMem\\BuildcsprojtoMem.csproj",
+        "packagesPath": "C:\\Users\\t-lilawr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\t-lilawr\\source\\repos\\BuildcsprojtoMem\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "C:\\Users\\t-lilawr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "Microsoft.Build": {
+              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[16.0.461, )"
+            },
+            "Microsoft.Build.Framework": {
+              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[16.0.461, )"
+            },
+            "Microsoft.Build.Locator": {
+              "target": "Package",
+              "version": "[1.2.2, )"
+            },
+            "Microsoft.Build.Utilities.Core": {
+              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[16.0.461, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

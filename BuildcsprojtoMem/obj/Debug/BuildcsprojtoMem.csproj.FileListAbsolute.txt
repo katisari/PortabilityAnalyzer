@@ -1,0 +1,11 @@
+C:\Users\t-lilawr\source\repos\BuildcsprojtoMem\obj\Debug\BuildcsprojtoMem.csproj.CoreCompileInputs.cache
+C:\Users\t-lilawr\source\repos\BuildcsprojtoMem\bin\Debug\Microsoft.Build.Locator.dll
+C:\Users\t-lilawr\source\repos\BuildcsprojtoMem\obj\Debug\BuildcsprojtoMem.csproj.CopyComplete
+C:\Users\t-lilawr\source\repos\BuildcsprojtoMem\obj\Debug\BuildcsprojtoMem.csprojAssemblyReference.cache
+C:\Users\t-lilawr\source\repos\BuildcsprojtoMem\bin\Debug\Libba.exe.config
+C:\Users\t-lilawr\source\repos\BuildcsprojtoMem\bin\Debug\Libba.xml
+C:\Users\t-lilawr\source\repos\BuildcsprojtoMem\bin\Debug\Libba.exe
+C:\Users\t-lilawr\source\repos\BuildcsprojtoMem\bin\Debug\Libba.pdb
+C:\Users\t-lilawr\source\repos\BuildcsprojtoMem\obj\Debug\Libba.exe.config
+C:\Users\t-lilawr\source\repos\BuildcsprojtoMem\obj\Debug\Libba.exe
+C:\Users\t-lilawr\source\repos\BuildcsprojtoMem\obj\Debug\Libba.pdb
