@@ -47,6 +47,7 @@ class MainViewModel:ViewModelBase
 
         
         var dialog = new Microsoft.Win32.OpenFileDialog();
+        dialog.Filter = "Project File (*.csproj)|*.csproj|All files (*.*)|*.*";
         dialog.InitialDirectory = @"C:\";
         dialog.ShowDialog();
 
