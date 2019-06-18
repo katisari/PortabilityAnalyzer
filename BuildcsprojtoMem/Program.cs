@@ -11,8 +11,10 @@ using Microsoft.Build.Logging;
 using Microsoft.Build.Locator;
 using Microsoft.Build.Utilities;
 using System.Net.Http.Headers;
-using System.IO;
 using System.Reflection;
+using System.IO;
+using System.Runtime.CompilerServices;
+using Microsoft.Build.Tasks;
 
 namespace BuildcsprojtoMem
 {
@@ -32,7 +34,7 @@ namespace BuildcsprojtoMem
         private static string Path = @"C:\Users\t-lilawr\source\repos\pracproj";
         private static string ProjPath = @"C:\Users\t-lilawr\source\repos\pracproj\pracproj.csproj";
         private static string LogFile = @"C:\Users\t-lilawr\source\repos\pracproj\logfile.log";
-       
+        private static string ExePath = @"C:\Users\t-lilawr\source\repos\pracproj\bin\Debug";
         public static void MyMethod()
         {
            
@@ -40,7 +42,8 @@ namespace BuildcsprojtoMem
             Dictionary<String, String> dic = new Dictionary<string, string>
                 {
                     { "Configuration", "Debug" },
-                    { "Platform", "AnyCPU" }
+                    { "Platform", "AnyCPU" }     //Do we want to let the user choose?
+                //drop down to choose which one 
                 };
             ProjectCollection pc = new ProjectCollection(dic, new List<ILogger> { logger }, ToolsetDefinitionLocations.Default);
 
@@ -51,13 +54,26 @@ namespace BuildcsprojtoMem
                 Console.WriteLine("Error");
             }
 
-            Console.WriteLine("{0}", System.IO.Path.GetFileName(ProjPath)); //Gets a file name if you give it the path 
-            string fullName = Assembly.GetEntryAssembly().Location;
-            string myName = System.IO.Path.GetFileNameWithoutExtension(fullName);
-            Console.WriteLine(myName);
+           
+
+            System.IO.StreamWriter File = new StreamWriter(@"C:\Users\t-lilawr\source\repos\pracproj\File_Name.txt");
+
+            var assembly = Assembly.GetExecutingAssembly();
+            foreach(AssemblyName an in assembly.GetReferencedAssemblies())
+            {
+                File.WriteLine(an.Name, an.Version, an.CultureInfo.Name);
+            }
+            var name = project.GetProperty("TargetPath");
+            
+            Console.WriteLine(name.ToString());
+
+            File.WriteLine(name.EvaluatedValue.ToString()); 
+            File.Close();
+
+
+
             Console.WriteLine("Done");
             Console.ReadKey();
-
         }
 
         public void ErrorHandler(object sender, BuildErrorEventArgs args)
