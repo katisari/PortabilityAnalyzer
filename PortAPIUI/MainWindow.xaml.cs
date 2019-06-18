@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.IO;
 using System.Windows;
 using Microsoft.Win32;
-
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -18,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace PortAPIUI
 {
@@ -32,13 +31,23 @@ namespace PortAPIUI
             InitializeComponent();
         }
 
-        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        private void About_Click(object sender, RoutedEventArgs e)
 
         {
+            Hyperlink link = new Hyperlink();
+            link.NavigateUri = new Uri("https://docs.microsoft.com/en-us/dotnet/standard/analyzers/portability-analyzer");
+            ProcessStartInfo psi = new ProcessStartInfo(link.NavigateUri.ToString());
+            psi.UseShellExecute = true;
+            Process.Start(psi);
+        }
+        private void Privacy_Click(object sender, RoutedEventArgs e)
 
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-
-            e.Handled = true;
+        {
+            Hyperlink link = new Hyperlink();
+            link.NavigateUri = new Uri("https://privacy.microsoft.com/en-us/privacystatement");
+            ProcessStartInfo psi = new ProcessStartInfo(link.NavigateUri.ToString());
+            psi.UseShellExecute = true;
+            Process.Start(psi);
         }
 
     }

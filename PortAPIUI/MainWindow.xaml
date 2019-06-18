@@ -18,7 +18,6 @@
         Background="White" 
         MinHeight="900" 
         MinWidth="900"
-        
         >
     <Grid>
         <Grid.RowDefinitions>
@@ -41,21 +40,18 @@
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="10" VerticalAlignment="Bottom" >
             <Button x:Name="ExportBtn" Content="Export Analysis.." Width =" 98" Height="30" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}" HorizontalAlignment="Stretch"  />
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Stretch"  >
-                <Hyperlink RequestNavigate="Hyperlink_RequestNavigate"  NavigateUri="https://docs.microsoft.com/en-us/dotnet/standard/analyzers/portability-analyzer" >  About this tool </Hyperlink>
+             <Hyperlink Click="About_Click"> About this tool </Hyperlink>
             </TextBlock>
-            
         </StackPanel>
         
         <Grid Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10">
             <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                 <Run  Text= "Privacy &#x0a;The analyzer will send anonymous API usage information to microsoft to help us improve .NET Core.
-
                     &#x0a;This way, we know which APIs are often used by customers who wish to target .NET Core. We won't submit any of your binaries or source code to Microsoft.
-
                     &#x0a;For our full privacy statement visit: " >  </Run>
-                <Hyperlink RequestNavigate="Hyperlink_RequestNavigate"  NavigateUri="https://privacy.microsoft.com/en-us/privacystatement"> 
-                       https://privacy.microsoft.com/en-us/privacystatement
-                   </Hyperlink>.
+                <Hyperlink Click="Privacy_Click"> https://privacy.microsoft.com/en-us/privacystatement </Hyperlink>
+                  
+                   
             </TextBlock>
         </Grid>
             
