@@ -20,25 +20,30 @@
         MinWidth="900"
         >
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width=" Auto"/>
         </Grid.ColumnDefinitions>
+        
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="10" >
             <Label Content= "Path to application folder: "  HorizontalAlignment="Stretch" />
             <TextBox Name="PathTextbox" Height="30" Text = "{Binding SelectedPath}"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" />
         </StackPanel>
+        
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="10">
             <Button  x:Name="BrowseBtn" Content="Browse ..." Command="{Binding OpenCommand}" Width =" 98" Margin="0,22,0,0" Height="30" HorizontalAlignment="Stretch"  />
             <Button x:Name="AnalzeBtn" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}" Content="Analyze"  Margin="0,12,0,0"  Height="30" HorizontalAlignment="Stretch"   />
         </StackPanel>
+        
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="10" VerticalAlignment="Bottom" >
-            <Button x:Name="ExportBtn" Content="Export Analysis.." Width =" 98" Height="30" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}" HorizontalAlignment="Stretch"  />
+            <Button x:Name="ExportBtn" Command="{Binding OpenCommand2}" Content="Export Analysis.." Width =" 98" Height="30" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}" HorizontalAlignment="Stretch"  />
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Stretch"  >
              <Hyperlink Click="About_Click"> About this tool </Hyperlink>
             </TextBlock>
@@ -50,8 +55,6 @@
                     &#x0a;This way, we know which APIs are often used by customers who wish to target .NET Core. We won't submit any of your binaries or source code to Microsoft.
                     &#x0a;For our full privacy statement visit: " >  </Run>
                 <Hyperlink Click="Privacy_Click"> https://privacy.microsoft.com/en-us/privacystatement </Hyperlink>
-                  
-                   
             </TextBlock>
         </Grid>
             

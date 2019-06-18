@@ -10,7 +10,8 @@ using System.Windows.Forms;
 class MainViewModel:ViewModelBase
     {
         public RelayCommand OpenCommand { get; set; }
-        
+        public RelayCommand OpenCommand2 { get; set; }
+
         private string _selectedPath;
 
         public string SelectedPath
@@ -25,10 +26,10 @@ class MainViewModel:ViewModelBase
 
      
 
-    public MainViewModel()
-    {
-        RegisterCommands();
-    }
+        public MainViewModel()
+        {
+            RegisterCommands();
+        }
 
        
 
@@ -37,8 +38,10 @@ class MainViewModel:ViewModelBase
         {
  
         
-        OpenCommand = new RelayCommand(ExecuteOpenFileDialog);
-       
+            OpenCommand = new RelayCommand(ExecuteOpenFileDialog);
+            OpenCommand2 = new RelayCommand(ExecuteSaveFileDialog);
+
+
          }
 
 
@@ -46,15 +49,28 @@ class MainViewModel:ViewModelBase
         {
 
         
-        var dialog = new Microsoft.Win32.OpenFileDialog();
-        dialog.Filter = "Project File (*.csproj)|*.csproj|All files (*.*)|*.*";
-        dialog.InitialDirectory = @"C:\";
-        dialog.ShowDialog();
-
-        SelectedPath = dialog.FileName;
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.Filter = "Project File (*.csproj)|*.csproj|All files (*.*)|*.*";
+            dialog.InitialDirectory = @"C:\";
+            dialog.ShowDialog();
+            SelectedPath = dialog.FileName;
         
 
         }
+
+        private void ExecuteSaveFileDialog()
+        {
+            var savedialog = new Microsoft.Win32.SaveFileDialog();
+            savedialog.FileName = "PortablityAnalysisReoprt";
+            savedialog.DefaultExt = ".text";
+            savedialog.Filter = "HTML file (*.html)|*.html|Json (*.json)|*.json| Excel (*.excel)|*.excel";
+            Nullable<bool> result = savedialog.ShowDialog();
+            if (result == true)
+            {
+                string filename = savedialog.FileName;
+            }
+
+    }
     
 }
 
