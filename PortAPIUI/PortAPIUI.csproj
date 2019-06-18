@@ -7,13 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <Compile Remove="Model\**" />
+    <Compile Remove="Views\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="Model\**" />
+    <None Remove="Views\**" />
+    <Page Remove="Model\**" />
+    <Page Remove="Views\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Views\" />
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
   </ItemGroup>
 
 </Project>
