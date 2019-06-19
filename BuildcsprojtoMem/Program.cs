@@ -20,66 +20,49 @@ namespace BuildcsprojtoMem
 {
     class Program
     {
-
-        
         static void Main(string[] args)
         {
             MSBuildLocator.RegisterDefaults();
-            temp.MyMethod();
-
+            string CsProjPath = args[0];
+            temp.MyMethod(CsProjPath);
         }
     }
     class temp
     {
-        private static string Path = @"C:\Users\t-lilawr\source\repos\pracproj";
         private static string ProjPath = @"C:\Users\t-lilawr\source\repos\pracproj\pracproj.csproj";
-        private static string LogFile = @"C:\Users\t-lilawr\source\repos\pracproj\logfile.log";
-        private static string ExePath = @"C:\Users\t-lilawr\source\repos\pracproj\bin\Debug";
-        public static void MyMethod()
+        private static List<string> configurations;
+        public static List<String> platforms;
+
+        public static void MyMethod(string CsProjPath)
         {
-           
             var logger = new ConsoleLogger();
             Dictionary<String, String> dic = new Dictionary<string, string>
                 {
                     { "Configuration", "Debug" },
-                    { "Platform", "AnyCPU" }     //Do we want to let the user choose?
-                //drop down to choose which one 
+                    { "Platform", "AnyCPU" } 
                 };
             ProjectCollection pc = new ProjectCollection(dic, new List<ILogger> { logger }, ToolsetDefinitionLocations.Default);
 
-            var project = pc.LoadProject(ProjPath);
+            var project = pc.LoadProject(CsProjPath);
+
+            configurations = project.ConditionedProperties["Configuration"];
+            platforms = project.ConditionedProperties["Platform"];
 
             if (!project.Build())
             {
                 Console.WriteLine("Error");
             }
 
+            var assembly = Assembly.LoadFrom(CsProjPath);
+            var dependents = assembly.GetReferencedAssemblies();
            
-
-            System.IO.StreamWriter File = new StreamWriter(@"C:\Users\t-lilawr\source\repos\pracproj\File_Name.txt");
-
-            var assembly = Assembly.GetExecutingAssembly();
-            foreach(AssemblyName an in assembly.GetReferencedAssemblies())
-            {
-                File.WriteLine(an.Name, an.Version, an.CultureInfo.Name);
-            }
             var name = project.GetProperty("TargetPath");
             
-            Console.WriteLine(name.ToString());
-
-            File.WriteLine(name.EvaluatedValue.ToString()); 
-            File.Close();
-
-
-
-            Console.WriteLine("Done");
             Console.ReadKey();
         }
 
         public void ErrorHandler(object sender, BuildErrorEventArgs args)
-        {
-
-        }
+        {}
     }
     public class ConsoleLogger : ILogger
     {
@@ -98,14 +81,10 @@ namespace BuildcsprojtoMem
         }
 
         private void EventSource_ErrorRaised(object sender, BuildErrorEventArgs e)
-        {
-            
-        }
+        {}
 
         public void Shutdown()
-        {
-            
-        }
+        {}
     }
 }
 
