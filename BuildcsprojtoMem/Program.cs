@@ -29,14 +29,12 @@ namespace BuildcsprojtoMem
     }
     class temp
     {
-       
         private static string ProjPath = @"C:\Users\t-lilawr\source\repos\pracproj\pracproj.csproj";
         private static List<string> configurations;
         public static List<String> platforms;
 
         public static void MyMethod(string CsProjPath)
         {
-           
             var logger = new ConsoleLogger();
             Dictionary<String, String> dic = new Dictionary<string, string>
                 {
@@ -55,22 +53,16 @@ namespace BuildcsprojtoMem
                 Console.WriteLine("Error");
             }
 
-            var assembly = Assembly.GetExecutingAssembly();
+            var assembly = Assembly.LoadFrom(CsProjPath);
             var dependents = assembly.GetReferencedAssemblies();
            
             var name = project.GetProperty("TargetPath");
             
-            Console.WriteLine(name.ToString());
-
-
-            Console.WriteLine("Done");
             Console.ReadKey();
         }
 
         public void ErrorHandler(object sender, BuildErrorEventArgs args)
-        {
-
-        }
+        {}
     }
     public class ConsoleLogger : ILogger
     {
@@ -89,14 +81,10 @@ namespace BuildcsprojtoMem
         }
 
         private void EventSource_ErrorRaised(object sender, BuildErrorEventArgs e)
-        {
-            
-        }
+        {}
 
         public void Shutdown()
-        {
-            
-        }
+        {}
     }
 }
 
