@@ -16,20 +16,22 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using Microsoft.Build.Tasks;
 
-namespace BuildcsprojtoMem
+namespace MSBuildAnalyzer
 {
     class Program
     {
         static void Main(string[] args)
         {
             MSBuildLocator.RegisterDefaults();
-            string CsProjPath = args[0];
+           string CsProjPath = args[0];
+           // string CsProjPath = @"C:\Users\t-lilawr\source\repos\pracproj\pracproj.csproj";
             temp.MyMethod(CsProjPath);
+           
         }
     }
     class temp
     {
-        private static string ProjPath = @"C:\Users\t-lilawr\source\repos\pracproj\pracproj.csproj";
+      
         private static List<string> configurations;
         public static List<String> platforms;
 
@@ -45,20 +47,33 @@ namespace BuildcsprojtoMem
 
             var project = pc.LoadProject(CsProjPath);
 
-            configurations = project.ConditionedProperties["Configuration"];
-            platforms = project.ConditionedProperties["Platform"];
-
-            if (!project.Build())
+            if (project.ConditionedProperties.Keys.Contains("Configuration") && project.ConditionedProperties.Keys.Contains("Platform"))
             {
-                Console.WriteLine("Error");
-            }
+                configurations = project.ConditionedProperties["Configuration"];
 
-            var assembly = Assembly.LoadFrom(CsProjPath);
-            var dependents = assembly.GetReferencedAssemblies();
-           
-            var name = project.GetProperty("TargetPath");
+                platforms = project.ConditionedProperties["Platform"];
+            }
+            //if (!project.Build())
+            //{
+            //    Console.WriteLine("Error");
+            //}
+            if (project.Properties.Any(n => n.Name == "TargetPath"))
+            {
+                var mypath = System.Reflection.Assembly.GetEntryAssembly().Location;
+                var targetPath = project.GetProperty("TargetPath");
+                var targetPathString = targetPath.EvaluatedValue.ToString();
+                var assembly = Assembly.LoadFrom(targetPathString); //question
+                List<String> dependents = new List<string>();
+                foreach (AssemblyName b in assembly.GetReferencedAssemblies())
+                {
+                    dependents.Add(b.ToString());
+                }
+                Console.WriteLine(targetPathString);
+            }
+         
             
             Console.ReadKey();
+            
         }
 
         public void ErrorHandler(object sender, BuildErrorEventArgs args)
