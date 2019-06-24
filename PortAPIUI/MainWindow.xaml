@@ -37,11 +37,11 @@
             <TextBox   Name="PathTextbox" Text = "{Binding SelectedPath}"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" />
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
                 <Label Content="Build Configuration: "/>
-                <ComboBox Width="350" SelectedItem="{Binding SelectedConfig}" ItemsSource="{Binding Config}" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}"/>
+                <ComboBox Width="350" SelectedIndex="0" SelectedItem="{Binding SelectedConfig}" ItemsSource="{Binding Config}" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
                 <Label Content="Build Platform: " Width="120"/>
-                <ComboBox x:Name="ComboBox" Width="350" SelectedItem="{Binding SelectedPlatform}" ItemsSource="{Binding Platform}" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}" />
+                <ComboBox x:Name="ComboBox" Width="350" SelectedIndex="0" SelectedItem="{Binding SelectedPlatform}" ItemsSource="{Binding Platform}" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}" />
             </StackPanel>
         </StackPanel>
 

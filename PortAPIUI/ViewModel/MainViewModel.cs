@@ -133,7 +133,12 @@ class MainViewModel : ViewModelBase
         ExportResult.InputPath = dialog.FileName;
      
         info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
-      // the 1st list is config the 2nd is platform and the 3r is assemblies 
+ 
+        Config = output.Config;
+        Platform = output.Plat;
+        Assemblies = output.Asse;
+        
+
 
 
 
