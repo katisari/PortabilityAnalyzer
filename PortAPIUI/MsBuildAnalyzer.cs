@@ -6,6 +6,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Documents;
@@ -63,6 +64,7 @@ namespace PortAPIUI
         private static void SortOutputHandler(object sendingProcess,
             DataReceivedEventArgs outLine)
         {
+
             // Collect the sort command output.
             if (!String.IsNullOrEmpty(outLine.Data))
             {

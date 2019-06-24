@@ -35,15 +35,23 @@
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="10" >
             <Label Content= "Path to application folder: "  HorizontalAlignment="Stretch" />
             <TextBox Name="PathTextbox" Height="30" Text = "{Binding SelectedPath}"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="5" />
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+                <Label Content="Build Configuration: "/>
+                <ComboBox Width="350" SelectedItem="{Binding SelectedConfig}" ItemsSource="{Binding Config}" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+                <Label Content="Build Platform " Width="120"/>
+                <ComboBox x:Name="ComboBox" Width="350" SelectedItem="{Binding SelectedPlatform}" ItemsSource="{Binding Platform}" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}" />
+            </StackPanel>
         </StackPanel>
         
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="10">
-            <Button  x:Name="BrowseBtn" Content="Browse ..." Command="{Binding OpenCommand}" Width =" 98" Margin="0,22,0,0" Height="30" HorizontalAlignment="Stretch"  />
-            <Button x:Name="AnalzeBtn" Command="{Binding OpenCommand3}" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}" Content="Analyze"  Margin="0,12,0,0"  Height="30" HorizontalAlignment="Stretch"   />
+            <Button  x:Name="BrowseBtn" Content="Browse ..." Command="{Binding Browse}" Width =" 98" Margin="0,22,0,0" Height="30" HorizontalAlignment="Stretch"  />
+            <Button x:Name="AnalzeBtn" Command="{Binding Analyze}" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}" Content="Analyze"  Margin="0,12,0,0"  Height="30" HorizontalAlignment="Stretch"   />
         </StackPanel>
         
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="10" VerticalAlignment="Bottom" >
-            <Button x:Name="ExportBtn" Command="{Binding OpenCommand2}" Content="Export Analysis.." Width =" 98" Height="30" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}" HorizontalAlignment="Stretch"  />
+            <Button x:Name="ExportBtn" Command="{Binding Export}" Content="Export Analysis.." Width =" 98" Height="30" IsEnabled="{Binding ElementName=PathTextbox,Path=Text.Length}" HorizontalAlignment="Stretch"  />
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Stretch"  >
              <Hyperlink Click="About_Click"> About this tool </Hyperlink>
             </TextBlock>
