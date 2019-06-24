@@ -41,6 +41,7 @@ namespace PortAPIUI
             psi.UseShellExecute = true;
             Process.Start(psi);
         }
+
         private void Privacy_Click(object sender, RoutedEventArgs e)
 
         {
@@ -51,5 +52,11 @@ namespace PortAPIUI
             Process.Start(psi);
         }
 
+        private void BStart_Click(object sender, RoutedEventArgs e)
+        {
+            ExportBtn.IsEnabled = true;
+            API.IsEnabled = true;
+            Assembly.IsEnabled = true;
+        }
     }
 }

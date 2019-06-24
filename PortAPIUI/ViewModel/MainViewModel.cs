@@ -5,6 +5,7 @@ using PortAPIUI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows.Documents;
 using System.Windows.Forms;
@@ -90,10 +91,10 @@ class MainViewModel : ViewModelBase
     {
         RegisterCommands();
         _assemblies = new List<string>();
-       _config = new List<string>();
+        _config = new List<string>();
         _platform = new List<string>();
 
-        
+
     }
 
 
@@ -129,9 +130,10 @@ class MainViewModel : ViewModelBase
         dialog.InitialDirectory = @"C:\";
         dialog.ShowDialog();
         SelectedPath = dialog.FileName;
+        ExportResult.InputPath = dialog.FileName;
         Assemblies = MsBuildAnalyzer.GetAssemblies(SelectedPath);
-       // Config = MsBuildAnalyzer.GetConfig();
-       // Platform = MsBuildAnalyzer.GetPlatform();
+        // Config = MsBuildAnalyzer.GetConfig();
+        // Platform = MsBuildAnalyzer.GetPlatform();
 
 
 
@@ -146,7 +148,8 @@ class MainViewModel : ViewModelBase
         Nullable<bool> result = savedialog.ShowDialog();
         if (result == true)
         {
-            string filename = savedialog.FileName;
+            string fileExtension = Path.GetExtension(savedialog.FileName);
+            ExportResult.ExportApiResult(savedialog.FileName, fileExtension);
         }
 
     }
