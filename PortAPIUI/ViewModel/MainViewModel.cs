@@ -90,10 +90,10 @@ class MainViewModel : ViewModelBase
     {
         RegisterCommands();
         _assemblies = new List<string>();
-       _config = new List<string>();
+        _config = new List<string>();
         _platform = new List<string>();
 
-        
+
     }
 
 
@@ -130,8 +130,8 @@ class MainViewModel : ViewModelBase
         dialog.ShowDialog();
         SelectedPath = dialog.FileName;
         Assemblies = MsBuildAnalyzer.GetAssemblies(SelectedPath);
-       // Config = MsBuildAnalyzer.GetConfig();
-       // Platform = MsBuildAnalyzer.GetPlatform();
+        // Config = MsBuildAnalyzer.GetConfig();
+        // Platform = MsBuildAnalyzer.GetPlatform();
 
 
 
