@@ -29,6 +29,7 @@ namespace PortAPIUI
         {
             DataContext = new MainViewModel();
             InitializeComponent();
+            
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
