@@ -3,86 +3,80 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Threading;
 
+
 namespace PortAPIUI
 {
     class MsBuildAnalyzer
     {
-
-
-
-        public static List<String> GetAssemblies(string projectPath)
+        private static StringBuilder output = null;
+        private static int numOutputLines = 0;
+        public static List<string> GetAssemblies(string path)
         {
-            StreamWriter file = new StreamWriter("Blank.txt");
-            file.Write("Hello");
-            file.Close();
-            MessageBox.Show("Analyzing...");
-            List<String> assemblies = new List<string>();
-            LaunchProcess lp = new LaunchProcess();
-            lp.launch(projectPath);
-            return assemblies;
-        }
-    }
-        class LaunchProcess {
-        Process process = new Process();
-        public void launch(String projectPath) {
-            //var InputPath = projectPath;
-            var ourPath = Environment.GetCommandLineArgs()[0];
+            // Initialize the process and its StartInfo properties.
+            // The sort command is a console application that
+            // reads and sorts text input.
+            var ourPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             var ourDirectory = System.IO.Path.GetDirectoryName(ourPath);
-            var parentPath = System.IO.Directory.GetParent(ourDirectory);
-            var AnalyzerPath = System.IO.Path.Combine(ourDirectory, "MSBuildAnalyzer\\MSBuildAnalyzer.exe");
 
-            
-            process.EnableRaisingEvents = true;
-            process.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(process_OutputDataReceived);
-            process.ErrorDataReceived += new System.Diagnostics.DataReceivedEventHandler(process_ErrorDataReceived);
-            process.Exited += new System.EventHandler(process_Exited);
+            var AnalyzerPath = System.IO.Path.Combine(ourDirectory, "MSBuildAnalyzer\\Libba.exe");
 
+            Process process = new Process();
             process.StartInfo.FileName = AnalyzerPath;
-            process.StartInfo.Arguments = projectPath;
+            process.StartInfo.Arguments = path;
+            // Set UseShellExecute to false for redirection.
             process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardError = true;
-            process.StartInfo.RedirectStandardOutput = true;
 
+            // Redirect the standard output of the sort command.  
+            // This stream is read asynchronously using an event handler.
+           process.StartInfo.RedirectStandardOutput = true;
+            output = new StringBuilder();
+
+            // Read the sort output.
+            process.OutputDataReceived += SortOutputHandler;
+
+            // Start the process.
             process.Start();
-            process.BeginErrorReadLine();
+
+            // Start read of the sort output stream.
             process.BeginOutputReadLine();
 
-            //below line is optional if we want a blocking call
-            //process.WaitForExit();
+            // Wait for the sort process to write the sorted text lines.
+            process.WaitForExit();
 
+            process.Close();
+
+
+            List<string> a = new List<string>();
+            a.Add(output.ToString());
+
+            return a;
         }
-        void process_Exited(object sender, EventArgs e)
+
+        private static void SortOutputHandler(object sendingProcess,
+            DataReceivedEventArgs outLine)
         {
-            LaunchProcess lp = new LaunchProcess();
-            
-            Console.WriteLine(string.Format("process exited with code {0}\n", lp.process.ExitCode.ToString()));
-            StreamWriter file1 = new StreamWriter("Blank1.txt");
-            file1.Write(string.Format("process exited with code {0}\n", lp.process.ExitCode.ToString()));
-            file1.Close();
-        }
+            // Collect the sort command output.
+            if (!String.IsNullOrEmpty(outLine.Data))
+            {
+                //numOutputLines++;
 
-        void process_ErrorDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            Console.WriteLine(e.Data + "\n");
-            StreamWriter file2 = new StreamWriter("Blank2.txt");
-            file2.Write(e.Data );
-            file2.Close();
+                //String[] w = (outLine.Data).Split(" ");
+                //// Add the text to the collected output.
+            //    foreach (String s in w)
+                {
+                    output.Append(outLine.Data);
+                }
+            }
         }
-
-        void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            Console.WriteLine(e.Data + "\n");
-           
-        }
-
     }
-        
+}
 
-    }
 
