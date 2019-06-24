@@ -15,15 +15,25 @@ using System.Windows.Threading;
 
 namespace PortAPIUI
 {
+    public class info
+    {
+        public List<string> Config { get; set; }
+        public List<string> Plat { get; set; }
+        public List<string> Asse { get; set; }
+        public info(List<string> config, List<string> plat, List<string> asse)
+        {
+            Config = config;
+            Plat = plat;
+            Asse = asse; 
+        }
+    }
     class MsBuildAnalyzer
     {
+       
         private static StringBuilder output = null;
-        private static int numOutputLines = 0;
         public static List<string> GetAssemblies(string path)
         {
             // Initialize the process and its StartInfo properties.
-            // The sort command is a console application that
-            // reads and sorts text input.
             var ourPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             var ourDirectory = System.IO.Path.GetDirectoryName(ourPath);
 
@@ -36,8 +46,7 @@ namespace PortAPIUI
             process.StartInfo.UseShellExecute = false;
 
             // Redirect the standard output of the sort command.  
-            // This stream is read asynchronously using an event handler.
-           process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardOutput = true;
             output = new StringBuilder();
 
             // Read the sort output.
@@ -54,11 +63,26 @@ namespace PortAPIUI
 
             process.Close();
 
+            //output has all info
+            
+            var f = output.ToString();
+            var start = f.IndexOf("Plat:");
+            var end = f.IndexOf("** Assem:");
+            var c = f.Substring(f.IndexOf("Config:"),start);
+            var p = f.Substring(start,end-start);
+            var a = f.Substring(f.IndexOf("Assem:"));
+        
+            return null;
+        }
 
-            List<string> a = new List<string>();
-            a.Add(output.ToString());
+        internal static List<string> GetConfig()
+        {
+            return new List<string>();
+        }
 
-            return a;
+        internal static List<string> GetPlatform()
+        {
+            return new List<string>();
         }
 
         private static void SortOutputHandler(object sendingProcess,
