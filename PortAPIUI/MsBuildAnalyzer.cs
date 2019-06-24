@@ -31,8 +31,9 @@ namespace PortAPIUI
     {
        
         private static StringBuilder output = null;
-        public static List<string> GetAssemblies(string path)
+        public static PortAPIUI.info GetAssemblies(string path)
         {
+            
             // Initialize the process and its StartInfo properties.
             var ourPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             var ourDirectory = System.IO.Path.GetDirectoryName(ourPath);
@@ -67,12 +68,32 @@ namespace PortAPIUI
             
             var f = output.ToString();
             var start = f.IndexOf("Plat:");
-            var end = f.IndexOf("** Assem:");
+            var end = f.IndexOf("Assem:");
             var c = f.Substring(f.IndexOf("Config:"),start);
+            var co = c.Split(" **");
+            List<string> config = new List<string>();
+            for(int i = 1; i < co.Length; i++)
+            {
+                config.Add(co[i]);
+            }
             var p = f.Substring(start,end-start);
-            var a = f.Substring(f.IndexOf("Assem:"));
-        
-            return null;
+            var po = p.Split(" **");
+            List<string> plat = new List<string>();
+            for (int i = 1; i < po.Length; i++)
+            {
+                plat.Add(po[i]);
+            }
+            var a = f.Substring(end);
+            var ao = a.Split(" **");
+            List<string> assem = new List<string>();
+            for (int i = 1; i < ao.Length; i++)
+            {
+                assem.Add(ao[i]);
+            }
+
+            PortAPIUI.info info = new PortAPIUI.info(config,plat,assem);
+
+            return info;
         }
 
         internal static List<string> GetConfig()

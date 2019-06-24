@@ -56,13 +56,13 @@ namespace MSBuildAnalyzer
                 Console.Write("Config:");
                 foreach(var config in configurations)
                 {
-                    Console.Write(" " + config + " **");
+                    Console.Write(" **" + config );
                 }
                 Console.WriteLine(" ");
                 Console.Write("Plat:");
                 foreach (var plat in platforms)
                 {
-                    Console.Write(" "+ plat + " **");
+                    Console.Write(" **"+ plat);
                 }
               
             }
@@ -79,10 +79,10 @@ namespace MSBuildAnalyzer
                 foreach (AssemblyName b in assembly.GetReferencedAssemblies())
                 {
                   //  dependents.Add(b.ToString());
-                    Console.Write(" "+ b + " **");
+                    Console.Write(" **"+ b );
                 }
               //  Console.Write(targetPathString + " ");
-                Console.Write(" " + assembly);
+                Console.Write(" **" + assembly);
             }
 
         //   Console.ReadKey();
