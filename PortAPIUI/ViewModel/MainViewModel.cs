@@ -21,11 +21,11 @@ class MainViewModel : ViewModelBase
     private string _selectedPath;
 
     private List<string> _assemblies;
-    private List<string> _config;
-    private List<string> _platform;
+    public static List<string> _config;
+    public static List<string> _platform;
 
-    private string _selectedConfig;
-    private string _selectedPlatfrom;
+    public static string _selectedConfig;
+    public static string _selectedPlatform;
 
     public string SelectedPath
     {
@@ -79,10 +79,10 @@ class MainViewModel : ViewModelBase
 
     public string SelectedPlatform
     {
-        get { return _selectedPlatfrom; }
+        get { return _selectedPlatform; }
         set
         {
-            _selectedPlatfrom = value;
+            _selectedPlatform = value;
             RaisePropertyChanged("SelectedPlatfrom");
         }
     }
@@ -113,9 +113,7 @@ class MainViewModel : ViewModelBase
 
     private void AnalyzeAPI()
     {
-
-        ApiAnalyzer.AnalyzeAssemblies(Assemblies);
-
+        _assemblies = Rebuild.ChosenBuild(SelectedPath);
     }
 
 

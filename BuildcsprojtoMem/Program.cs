@@ -16,6 +16,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using Microsoft.Build.Tasks;
 using System.Diagnostics;
+using BuildcsprojtoMem;
 
 namespace MSBuildAnalyzer
 {
@@ -25,9 +26,21 @@ namespace MSBuildAnalyzer
         {
             MSBuildLocator.RegisterDefaults();
             string CsProjPath = args[0];
+
+
             //string CsProjPath = @"C:\Users\t-lilawr\source\repos\pracproj\pracproj.csproj";
-            temp.MyMethod(CsProjPath);
+            if (args.Length == 1)
+            {
+                temp.MyMethod(CsProjPath);
+            }
            
+            
+            if (args.Length > 1)
+            {
+                string ChosenConfig = args[1];
+                string ChosenPlat = args[2];
+                Chosen.configure(CsProjPath, ChosenConfig, ChosenPlat);
+            }
         }
     }
     public class temp
