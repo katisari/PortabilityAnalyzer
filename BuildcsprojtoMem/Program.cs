@@ -51,34 +51,38 @@ namespace MSBuildAnalyzer
 
         public static void MyMethod(string CsProjPath)
         {
+            const string box1 = "Configuration";
+            const string box2 = "Platform";
             Dictionary<String, String> dic = new Dictionary<string, string>
                 {
-                    { "Configuration", "Debug" },
-                    { "Platform", "AnyCPU" } 
+                    { box1, "Debug" },
+                    { box2, "AnyCPU" } 
                 };
             ProjectCollection pc = new ProjectCollection(dic, null, ToolsetDefinitionLocations.Default) ;
 
             var project = pc.LoadProject(CsProjPath);
+            project.Build();
 
-        //    if (project.ConditionedProperties.Keys.Contains("Configuration") && project.ConditionedProperties.Keys.Contains("Platform"))
-            {
-                configurations = project.ConditionedProperties["Configuration"];
+            configurations = project.ConditionedProperties[box1];
+            platforms = project.ConditionedProperties[box2];
 
-                platforms = project.ConditionedProperties["Platform"];
+            var con = new string[0];
+            var pla = new string[0];
 
                 Console.Write("Config:");
                 foreach(var config in configurations)
                 {
+                     con.Append(config);
                     Console.Write(" **" + config );
                 }
                 Console.WriteLine(" ");
                 Console.Write("Plat:");
                 foreach (var plat in platforms)
                 {
+                     pla.Append(plat);
                     Console.Write(" **"+ plat);
                 }
-              
-            }
+
             Console.WriteLine(" ");
             Console.Write("Assem:");
             if (project.Properties.Any(n => n.Name == "TargetPath"))
@@ -86,25 +90,32 @@ namespace MSBuildAnalyzer
                 var mypath = System.Reflection.Assembly.GetEntryAssembly().Location;
                 var targetPath = project.GetProperty("TargetPath");
                 var targetPathString = targetPath.EvaluatedValue.ToString();
-                var assembly = Assembly.LoadFrom(targetPathString); //question
-             //   List<String> dependents = new List<string>();
-               
+                var assembly = Assembly.LoadFrom(targetPathString); 
                 foreach (AssemblyName b in assembly.GetReferencedAssemblies())
                 {
-                  //  dependents.Add(b.ToString());
                     Console.Write(" **"+ b );
                 }
-              //  Console.Write(targetPathString + " ");
                 Console.Write(" **" + assembly);
             }
 
-        //   Console.ReadKey();
-        }
+            Console.ReadKey();
+            foreach (string q in pla)
+            {
+                foreach (string s in con)
+                {
+                    Dictionary<String, String> dictionary = new Dictionary<string, string>
+                {
+                    { box1, s },
+                    { box2, q }
+                };
+                    ProjectCollection collection = new ProjectCollection(dictionary, null, ToolsetDefinitionLocations.Default);
 
-        public void ErrorHandler(object sender, BuildErrorEventArgs args)
-        {}
+                    var pro = collection.LoadProject(CsProjPath);
+                    pro.Build();
+                }
+            }
+        }
     }
-  
 }
 
 
