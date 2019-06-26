@@ -20,24 +20,27 @@ namespace BuildcsprojtoMem
             ProjectCollection pc = new ProjectCollection(dic, null, ToolsetDefinitionLocations.Default);
 
             var project = pc.LoadProject(path);
+            project.Build();
 
-            Console.Write("Assem:");
-            if (project.Properties.Any(n => n.Name == "TargetPath"))
+            if (project.IsBuildEnabled == true)
             {
-                var mypath = System.Reflection.Assembly.GetEntryAssembly().Location;
-                var targetPath = project.GetProperty("TargetPath");
-                var targetPathString = targetPath.EvaluatedValue.ToString();
-                var assembly = Assembly.LoadFrom(targetPathString); 
-
-                foreach (AssemblyName b in assembly.GetReferencedAssemblies())
+                Console.Write("Assem:");
+                if (project.Properties.Any(n => n.Name == "TargetPath"))
                 {
-                    Console.Write(" **" + b);
+                    var mypath = System.Reflection.Assembly.GetEntryAssembly().Location;
+                    var targetPath = project.GetProperty("TargetPath");
+                    var targetPathString = targetPath.EvaluatedValue.ToString();
+                    var assembly = Assembly.LoadFrom(targetPathString);
+
+                    foreach (AssemblyName b in assembly.GetReferencedAssemblies())
+                    {
+                        Console.Write(" **" + b);
+                    }
+                    Console.Write(" **" + assembly);
                 }
-                Console.Write(" **" + assembly);
+
+                //   Console.ReadKey();
             }
-
-            //   Console.ReadKey();
-
         }
     }
 }

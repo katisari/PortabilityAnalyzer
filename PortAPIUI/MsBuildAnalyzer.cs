@@ -18,13 +18,14 @@ namespace PortAPIUI
     public static class Rebuild
     {
         private static StringBuilder o = null;
-        public static List<string> ChosenBuild(String path) {
+        public static List<string> ChosenBuild(String path)
+        {
             var ourPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             var ourDirectory = System.IO.Path.GetDirectoryName(ourPath);
             var AnalyzerPath = System.IO.Path.Combine(ourDirectory, "MSBuildAnalyzer\\BuildProj.exe");
             Process process = new Process();
             process.StartInfo.FileName = AnalyzerPath;
-            process.StartInfo.Arguments = $"{path} {MainViewModel._selectedConfig} {MainViewModel._selectedPlatform}";  
+            process.StartInfo.Arguments = $"{path} {MainViewModel._selectedConfig} {MainViewModel._selectedPlatform}";
             // Set UseShellExecute to false for redirection.
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
@@ -42,13 +43,13 @@ namespace PortAPIUI
             List<string> assemblies = new List<string>();
             var name = o.ToString();
             var sec = name.Split(" **");
-            for(int i = 1; i < sec.Length; i++)
+            for (int i = 1; i < sec.Length; i++)
             {
                 assemblies.Add(sec[i]);
             }
             return assemblies;
         }
-        private static void OutputHandler(object sendingProcess,DataReceivedEventArgs line)
+        private static void OutputHandler(object sendingProcess, DataReceivedEventArgs line)
         {
             if (!String.IsNullOrEmpty(line.Data))
             {
@@ -56,9 +57,6 @@ namespace PortAPIUI
             }
         }
     }
-
-
-
     public class info
     {
         public List<string> Config { get; set; }
@@ -68,11 +66,11 @@ namespace PortAPIUI
         {
             Config = config;
             Plat = plat;
-            Asse = asse; 
+            Asse = asse;
         }
     }
 
-    
+
     class MsBuildAnalyzer
     {
         private static StringBuilder output = null;
@@ -108,18 +106,17 @@ namespace PortAPIUI
             process.Close();
 
             //output has all info
-            
             var f = output.ToString();
             var start = f.IndexOf("Plat:");
             var end = f.IndexOf("Assem:");
-            var c = f.Substring(f.IndexOf("Config:"),start);
+            var c = f.Substring(f.IndexOf("Config:"), start);
             var co = c.Split(" **");
             List<string> config = new List<string>();
-            for(int i = 1; i < co.Length; i++)
+            for (int i = 1; i < co.Length; i++)
             {
                 config.Add(co[i]);
             }
-            var p = f.Substring(start,end-start);
+            var p = f.Substring(start, end - start);
             var po = p.Split(" **");
             List<string> plat = new List<string>();
             for (int i = 1; i < po.Length; i++)
@@ -133,18 +130,17 @@ namespace PortAPIUI
             {
                 assem.Add(ao[i]);
             }
-            PortAPIUI.info info = new PortAPIUI.info(config,plat,assem);
+            PortAPIUI.info info = new PortAPIUI.info(config, plat, assem);
 
             return info;
         }
-
         private static void SortOutputHandler(object sendingProcess,
             DataReceivedEventArgs outLine)
         {
             // Collect the sort command output.
             if (!String.IsNullOrEmpty(outLine.Data))
             {
-                    output.Append(outLine.Data);
+                output.Append(outLine.Data);
             }
         }
     }
