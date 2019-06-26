@@ -45,13 +45,9 @@
             </StackPanel>
         </StackPanel>
 
-        <DataGrid x:Name="Assembly" Grid.Row="1" Grid.Column="0" Margin="10" BorderBrush="#FFABADB3"
-                  HorizontalAlignment="Stretch" IsEnabled="False">
-            <DataGrid.Columns >
-                <DataGridTextColumn Header="Assembly" Width="*"/>
-                <DataGridTextColumn Header="Compatiblity" Width="*"/>
-
-            </DataGrid.Columns>
+        <DataGrid x:Name="AssemblyGrid" Grid.Row="1" Grid.Column="0" AutoGeneratingColumn="OnAutoGeneratingColumn" Margin="10" BorderBrush="#FFABADB3"
+                  HorizontalAlignment="Stretch" IsEnabled="False" ColumnWidth="*">
+      
         </DataGrid>
 
         <DataGrid x:Name="API" Grid.Row="2" Grid.Column="0" Margin="10" BorderBrush="#FFABADB3" IsEnabled="False"  >

@@ -2,18 +2,25 @@
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using PortAPIUI;
+using PortAPIUI.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-class MainViewModel : ViewModelBase
+
+
+class MainViewModel : ObservableObject
 {
+  //  private ObservableCollection<Assembly> AssemInfo { get; set; }
     public RelayCommand Browse { get; set; }
     public RelayCommand Export { get; set; }
     public RelayCommand Analyze { get; set; }
@@ -24,8 +31,18 @@ class MainViewModel : ViewModelBase
     private List<string> _config;
     private List<string> _platform;
 
+    //private ObservableCollection<Assembly> _assemInfo;
+
     private string _selectedConfig;
     private string _selectedPlatfrom;
+
+/*    public ObservableCollection<Assembly> AssemInfo
+    {
+        get { return _assemInfo; }
+        set { _assemInfo = value; RaisePropertyChanged("AssemInfo");}
+    } */
+
+
 
     public string SelectedPath
     {
@@ -94,7 +111,27 @@ class MainViewModel : ViewModelBase
         _config = new List<string>();
         _platform = new List<string>();
 
+        /*        var _assemInfo = new List<Assembly>
+                {
+                    new Assembly
+                    {
+                    Name = "shjgbfhjs",
+                    Compatablity ="jkdfsgh"
+                    }
+                };*/
 
+        // AssemInfo = CollectionViewSource.GetDefaultView(_assemInfo);
+/*        assembly = new ObservableCollection<Assembly>();
+        assembly.Add(new Assembly { Compatability = "100%", Name = "Pratcice" });*/
+
+
+     /*    AssemInfo = new ObservableCollection<Assembly>();
+        AssemInfo.Add(new Assembly
+        {
+            Name = "shjgbfhjs",
+            Compatablity = "jkdfsgh",
+        });
+*/
     }
 
 
@@ -116,10 +153,13 @@ class MainViewModel : ViewModelBase
 
         ApiAnalyzer.AnalyzeAssemblies(Assemblies);
 
-    }
+        
+   
+
+}
 
 
-
+    //Allows users to select csproj file
 
     private void ExecuteOpenFileDialog()
     {
@@ -137,6 +177,7 @@ class MainViewModel : ViewModelBase
         Config = output.Config;
         Platform = output.Plat;
         Assemblies = output.Asse;
+    
         
 
 
