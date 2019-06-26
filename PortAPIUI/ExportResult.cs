@@ -5,6 +5,8 @@ using System.IO;
 using System.Text;
 using System.Windows;
 
+[assembly: System.Windows.Media.DisableDpiAwareness]
+
 namespace PortAPIUI
 {
     class ExportResult
