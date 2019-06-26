@@ -113,7 +113,8 @@ class MainViewModel : ViewModelBase
 
     private void AnalyzeAPI()
     {
-        _assemblies = Rebuild.ChosenBuild(SelectedPath);
+        //_assemblies = Rebuild.ChosenBuild(SelectedPath);
+
     }
 
 
@@ -130,13 +131,13 @@ class MainViewModel : ViewModelBase
         SelectedPath = dialog.FileName;
         ExportResult.InputPath = dialog.FileName;
      
-        info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
+        //info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
  
-        Config = output.Config;
-        Platform = output.Plat;
-        Assemblies = output.Asse;
+        //Config = output.Config;
+        //Platform = output.Plat;
+        //Assemblies = output.Asse;
         
-
+        
 
 
 
