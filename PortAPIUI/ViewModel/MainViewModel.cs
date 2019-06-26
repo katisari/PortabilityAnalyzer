@@ -20,33 +20,20 @@ using System.Windows.Threading;
 
 class MainViewModel : ObservableObject
 {
-  //  private ObservableCollection<Assembly> AssemInfo { get; set; }
+
     public RelayCommand Browse { get; set; }
     public RelayCommand Export { get; set; }
     public RelayCommand Analyze { get; set; }
 
-    private string _selectedPath;
+    public string _selectedPath;
 
-    private List<string> _assemblies;
-    public static List<string> _config;
-    public static List<string> _platform;
+    private  List<string> _assemblies;
+    private List<string> _config;
+    private List<string> _platform;
 
-<<<<<<< HEAD
-    //private ObservableCollection<Assembly> _assemInfo;
 
-    private string _selectedConfig;
-    private string _selectedPlatfrom;
-=======
-    public static string _selectedConfig;
-    public static string _selectedPlatform;
->>>>>>> origin/master
-
-/*    public ObservableCollection<Assembly> AssemInfo
-    {
-        get { return _assemInfo; }
-        set { _assemInfo = value; RaisePropertyChanged("AssemInfo");}
-    } */
-
+    public string _selectedConfig;
+    public string _selectedPlatfrom;
 
 
     public string SelectedPath
@@ -79,7 +66,7 @@ class MainViewModel : ObservableObject
             RaisePropertyChanged("Platform");
         }
     }
-    public List<string> Assemblies
+    public  List<string> Assemblies
     {
         get { return _assemblies; }
         set
@@ -101,10 +88,10 @@ class MainViewModel : ObservableObject
 
     public string SelectedPlatform
     {
-        get { return _selectedPlatform; }
+        get { return _selectedPlatfrom; }
         set
         {
-            _selectedPlatform = value;
+            _selectedPlatfrom = value;
             RaisePropertyChanged("SelectedPlatfrom");
         }
     }
@@ -116,30 +103,7 @@ class MainViewModel : ObservableObject
         _config = new List<string>();
         _platform = new List<string>();
 
-        /*        var _assemInfo = new List<Assembly>
-                {
-                    new Assembly
-                    {
-                    Name = "shjgbfhjs",
-                    Compatablity ="jkdfsgh"
-                    }
-                };*/
-
-        // AssemInfo = CollectionViewSource.GetDefaultView(_assemInfo);
-/*        assembly = new ObservableCollection<Assembly>();
-        assembly.Add(new Assembly { Compatability = "100%", Name = "Pratcice" });*/
-
-
-     /*    AssemInfo = new ObservableCollection<Assembly>();
-        AssemInfo.Add(new Assembly
-        {
-            Name = "shjgbfhjs",
-            Compatablity = "jkdfsgh",
-        });
-*/
     }
-
-
 
     private void RegisterCommands()
 
@@ -155,16 +119,8 @@ class MainViewModel : ObservableObject
 
     private void AnalyzeAPI()
     {
-<<<<<<< HEAD
 
         ApiAnalyzer.AnalyzeAssemblies(Assemblies);
-
-        
-   
-=======
-        _assemblies = Rebuild.ChosenBuild(SelectedPath);
-    }
->>>>>>> origin/master
 
 }
 
@@ -187,12 +143,6 @@ class MainViewModel : ObservableObject
         Config = output.Config;
         Platform = output.Plat;
         Assemblies = output.Asse;
-    
-        
-
-
-
-
     }
 
     private void ExecuteSaveFileDialog()
@@ -208,6 +158,23 @@ class MainViewModel : ObservableObject
             ExportResult.ExportApiResult(savedialog.FileName, fileExtension);
         }
 
+    }
+    public static ObservableCollection<AssemblyModel> GetAssemblies()
+    {
+        var assemInfo = new ObservableCollection<AssemblyModel>();
+      /*  foreach (var item in Assemblies)
+        {
+            assemInfo.Add(item);
+        }*/
+        /*        assemInfo.Add(new AssemblyModel()
+                {
+                    Name = "shjgbfhjs",
+                    Compatablity = "jkdfsgh"
+                }
+                    );
+              */
+
+        return assemInfo;
     }
 
 }

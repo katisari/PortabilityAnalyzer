@@ -24,7 +24,8 @@ namespace PortAPIUI
             var AnalyzerPath = System.IO.Path.Combine(ourDirectory, "MSBuildAnalyzer\\BuildProj.exe");
             Process process = new Process();
             process.StartInfo.FileName = AnalyzerPath;
-            process.StartInfo.Arguments = $"{path} {MainViewModel._selectedConfig} {MainViewModel._selectedPlatform}";  
+            MainViewModel mv = new MainViewModel();
+            process.StartInfo.Arguments = $"{path} {mv._selectedConfig} {mv._selectedPlatfrom}";  
             // Set UseShellExecute to false for redirection.
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;

@@ -11,6 +11,7 @@ namespace PortAPIUI.Model
         private string _name;
         private string _compaptality;
 
+
         public string Name
         {
             get
@@ -35,20 +36,8 @@ namespace PortAPIUI.Model
                 RaisePropertyChanged("Name");
             }
         }
-        public static ObservableCollection<AssemblyModel> GetAssemblies()
-        {
-            var assemInfo = new ObservableCollection<AssemblyModel>();
-            assemInfo.Add(new AssemblyModel()
-            {
-                Name = "shjgbfhjs",
-                Compatablity = "jkdfsgh"
-            }
-                );
-                    
-                   
-            return assemInfo;
-        }
-            
+
+
 
     }
 }

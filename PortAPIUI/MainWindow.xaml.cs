@@ -31,7 +31,7 @@ namespace PortAPIUI
         {
             DataContext = new MainViewModel();
             InitializeComponent();
-            AssemblyGrid.ItemsSource = AssemblyModel.GetAssemblies();
+            AssemblyGrid.ItemsSource = MainViewModel.GetAssemblies();
 
 
         }
@@ -65,6 +65,7 @@ namespace PortAPIUI
             API.IsEnabled = true;
             AssemblyGrid.IsEnabled = true;
         }
+        //Get rid of IsInDesignMode Column
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             PropertyDescriptor propertyDescriptor = (PropertyDescriptor)e.PropertyDescriptor;

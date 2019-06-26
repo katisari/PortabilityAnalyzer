@@ -46,7 +46,7 @@
         </StackPanel>
 
         <DataGrid x:Name="AssemblyGrid" Grid.Row="1" Grid.Column="0" AutoGeneratingColumn="OnAutoGeneratingColumn" Margin="10" BorderBrush="#FFABADB3"
-                  HorizontalAlignment="Stretch" IsEnabled="False" ColumnWidth="*">
+                  HorizontalAlignment="Stretch" IsEnabled="False" ColumnWidth="*" >
       
         </DataGrid>
 
