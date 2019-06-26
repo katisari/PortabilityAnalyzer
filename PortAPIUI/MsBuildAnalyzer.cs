@@ -15,6 +15,50 @@ using System.Windows.Threading;
 
 namespace PortAPIUI
 {
+    public static class Rebuild
+    {
+        private static StringBuilder o = null;
+        public static List<string> ChosenBuild(String path) {
+            var ourPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            var ourDirectory = System.IO.Path.GetDirectoryName(ourPath);
+            var AnalyzerPath = System.IO.Path.Combine(ourDirectory, "MSBuildAnalyzer\\BuildProj.exe");
+            Process process = new Process();
+            process.StartInfo.FileName = AnalyzerPath;
+            process.StartInfo.Arguments = $"{path} {MainViewModel._selectedConfig} {MainViewModel._selectedPlatform}";  
+            // Set UseShellExecute to false for redirection.
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            // Read the sort output.
+            o = new StringBuilder();
+            process.OutputDataReceived += OutputHandler;
+            // Start the process.
+            process.Start();
+            // Start read of the sort output stream.
+            process.BeginOutputReadLine();
+            // Wait for the sort process to write the sorted text lines.
+            process.WaitForExit();
+            process.Close();
+
+            List<string> assemblies = new List<string>();
+            var name = o.ToString();
+            var sec = name.Split(" **");
+            for(int i = 1; i < sec.Length; i++)
+            {
+                assemblies.Add(sec[i]);
+            }
+            return assemblies;
+        }
+        private static void OutputHandler(object sendingProcess,DataReceivedEventArgs line)
+        {
+            if (!String.IsNullOrEmpty(line.Data))
+            {
+                o.Append(line.Data);
+            }
+        }
+    }
+
+
+
     public class info
     {
         public List<string> Config { get; set; }
@@ -27,18 +71,17 @@ namespace PortAPIUI
             Asse = asse; 
         }
     }
+
+    
     class MsBuildAnalyzer
     {
-       
         private static StringBuilder output = null;
         public static PortAPIUI.info GetAssemblies(string path)
         {
-            
             // Initialize the process and its StartInfo properties.
             var ourPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             var ourDirectory = System.IO.Path.GetDirectoryName(ourPath);
-
-            var AnalyzerPath = System.IO.Path.Combine(ourDirectory, "MSBuildAnalyzer\\Libba.exe");
+            var AnalyzerPath = System.IO.Path.Combine(ourDirectory, "MSBuildAnalyzer\\BuildProj.exe");
 
             Process process = new Process();
             process.StartInfo.FileName = AnalyzerPath;
@@ -90,37 +133,18 @@ namespace PortAPIUI
             {
                 assem.Add(ao[i]);
             }
-
             PortAPIUI.info info = new PortAPIUI.info(config,plat,assem);
 
             return info;
         }
 
-        internal static List<string> GetConfig()
-        {
-            return new List<string>();
-        }
-
-        internal static List<string> GetPlatform()
-        {
-            return new List<string>();
-        }
-
         private static void SortOutputHandler(object sendingProcess,
             DataReceivedEventArgs outLine)
         {
-
             // Collect the sort command output.
             if (!String.IsNullOrEmpty(outLine.Data))
             {
-                //numOutputLines++;
-
-                //String[] w = (outLine.Data).Split(" ");
-                //// Add the text to the collected output.
-            //    foreach (String s in w)
-                {
                     output.Append(outLine.Data);
-                }
             }
         }
     }
