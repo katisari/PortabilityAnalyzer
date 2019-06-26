@@ -2,15 +2,25 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Text;
 
 namespace PortAPIUI.Model
 {
-    class AssemblyModel : ViewModelBase
+    internal class AssemblyModel : ViewModelBase
     {
         private string _name;
-        private string _compaptality;
 
+
+        public override string ToString()
+        {
+            return _name;
+        }
+
+        public AssemblyModel(string assembly)
+        {
+            _name = assembly;
+        }
 
         public string Name
         {
@@ -24,20 +34,6 @@ namespace PortAPIUI.Model
                 RaisePropertyChanged("Name");
             }
         }
-        public string Compatablity
-        {
-            get
-            {
-                return _compaptality;
-            }
-            set
-            {
-                _compaptality = value;
-                RaisePropertyChanged("Name");
-            }
-        }
-
-
-
+        
     }
 }

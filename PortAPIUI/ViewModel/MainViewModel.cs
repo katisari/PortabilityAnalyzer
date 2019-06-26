@@ -6,35 +6,30 @@ using PortAPIUI.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-
-
-class MainViewModel : ObservableObject
+class MainViewModel : ViewModelBase
 {
-
     public RelayCommand Browse { get; set; }
     public RelayCommand Export { get; set; }
     public RelayCommand Analyze { get; set; }
 
-    public string _selectedPath;
+    private string _selectedPath;
 
-    private  List<string> _assemblies;
-    private List<string> _config;
-    private List<string> _platform;
+    private List<string> _assemblies;
+    public static List<string> _config;
+    public static List<string> _platform;
 
+    public static string _selectedConfig;
+    public static string _selectedPlatform;
 
-    public string _selectedConfig;
-    public string _selectedPlatfrom;
-
+    public ObservableCollection<AssemblyModel> AssemblyCollection { get; set; } = new ObservableCollection<AssemblyModel>();
 
     public string SelectedPath
     {
@@ -66,7 +61,7 @@ class MainViewModel : ObservableObject
             RaisePropertyChanged("Platform");
         }
     }
-    public  List<string> Assemblies
+    public List<string> Assemblies
     {
         get { return _assemblies; }
         set
@@ -88,10 +83,10 @@ class MainViewModel : ObservableObject
 
     public string SelectedPlatform
     {
-        get { return _selectedPlatfrom; }
+        get { return _selectedPlatform; }
         set
         {
-            _selectedPlatfrom = value;
+            _selectedPlatform = value;
             RaisePropertyChanged("SelectedPlatfrom");
         }
     }
@@ -103,7 +98,10 @@ class MainViewModel : ObservableObject
         _config = new List<string>();
         _platform = new List<string>();
 
+
     }
+
+
 
     private void RegisterCommands()
 
@@ -119,13 +117,16 @@ class MainViewModel : ObservableObject
 
     private void AnalyzeAPI()
     {
+        Assemblies = Rebuild.ChosenBuild(SelectedPath);
 
-        ApiAnalyzer.AnalyzeAssemblies(Assemblies);
+        foreach(var assembly in Assemblies)
+        {
+            AssemblyCollection.Add(new AssemblyModel(assembly));
+        }
+    }
 
-}
 
 
-    //Allows users to select csproj file
 
     private void ExecuteOpenFileDialog()
     {
@@ -137,12 +138,17 @@ class MainViewModel : ObservableObject
         dialog.ShowDialog();
         SelectedPath = dialog.FileName;
         ExportResult.InputPath = dialog.FileName;
-     
+
         info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
- 
+
         Config = output.Config;
         Platform = output.Plat;
-        Assemblies = output.Asse;
+        
+
+
+
+
+
     }
 
     private void ExecuteSaveFileDialog()
@@ -159,23 +165,5 @@ class MainViewModel : ObservableObject
         }
 
     }
-    public static ObservableCollection<AssemblyModel> GetAssemblies()
-    {
-        var assemInfo = new ObservableCollection<AssemblyModel>();
-      /*  foreach (var item in Assemblies)
-        {
-            assemInfo.Add(item);
-        }*/
-        /*        assemInfo.Add(new AssemblyModel()
-                {
-                    Name = "shjgbfhjs",
-                    Compatablity = "jkdfsgh"
-                }
-                    );
-              */
-
-        return assemInfo;
-    }
 
 }
-

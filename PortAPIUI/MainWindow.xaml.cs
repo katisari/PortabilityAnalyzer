@@ -31,7 +31,7 @@ namespace PortAPIUI
         {
             DataContext = new MainViewModel();
             InitializeComponent();
-            AssemblyGrid.ItemsSource = MainViewModel.GetAssemblies();
+           // AssemblyGrid.ItemsSource = MainViewModel.GetAssemblies();
 
 
         }
@@ -62,8 +62,8 @@ namespace PortAPIUI
         private void BStart_Click(object sender, RoutedEventArgs e)
         {
             ExportBtn.IsEnabled = true;
-            API.IsEnabled = true;
-            AssemblyGrid.IsEnabled = true;
+            APIGrid.IsEnabled = true;
+            AssemComboBox.IsEnabled = true;
         }
         //Get rid of IsInDesignMode Column
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

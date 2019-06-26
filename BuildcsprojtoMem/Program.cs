@@ -61,7 +61,7 @@ namespace MSBuildAnalyzer
             ProjectCollection pc = new ProjectCollection(dic, null, ToolsetDefinitionLocations.Default) ;
 
             var project = pc.LoadProject(CsProjPath);
-            project.Build();
+         //   project.Build();
 
             configurations = project.ConditionedProperties[box1];
             platforms = project.ConditionedProperties[box2];
@@ -98,22 +98,22 @@ namespace MSBuildAnalyzer
                 Console.Write(" **" + assembly);
             }
 
-            Console.ReadKey();
-            foreach (string q in pla)
-            {
-                foreach (string s in con)
-                {
-                    Dictionary<String, String> dictionary = new Dictionary<string, string>
-                {
-                    { box1, s },
-                    { box2, q }
-                };
-                    ProjectCollection collection = new ProjectCollection(dictionary, null, ToolsetDefinitionLocations.Default);
+            //Console.ReadKey();
+            //foreach (string q in pla)
+            //{
+            //    foreach (string s in con)
+            //    {
+            //        Dictionary<String, String> dictionary = new Dictionary<string, string>
+            //    {
+            //        { box1, s },
+            //        { box2, q }
+            //    };
+            //        ProjectCollection collection = new ProjectCollection(dictionary, null, ToolsetDefinitionLocations.Default);
 
-                    var pro = collection.LoadProject(CsProjPath);
-                    pro.Build();
-                }
-            }
+            //        var pro = collection.LoadProject(CsProjPath);
+            //        pro.Build();
+            //    }
+            //}
         }
     }
 }
