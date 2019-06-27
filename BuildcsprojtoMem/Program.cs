@@ -78,10 +78,10 @@ namespace MSBuildAnalyzer
             Console.Write("Assembly:");
             if (project.Properties.Any(n => n.Name == "TargetPath"))
             {
-                var MyPath = System.Reflection.Assembly.GetEntryAssembly().Location;
-                var TargetPath = project.GetProperty("TargetPath");
-                var TargetPathString = TargetPath.EvaluatedValue.ToString();
-                var assembly = Assembly.LoadFrom(TargetPathString);
+                var myPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+                var targetPath = project.GetProperty("TargetPath");
+                var targetPathString = targetPath.EvaluatedValue.ToString();
+                var assembly = Assembly.LoadFrom(targetPathString);
                 foreach (AssemblyName AssemblyName in assembly.GetReferencedAssemblies())
                 {
                     Console.Write(" **" + Assembly.Load(AssemblyName).Location);
