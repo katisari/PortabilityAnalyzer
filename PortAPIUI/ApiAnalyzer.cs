@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Windows;
@@ -17,8 +19,12 @@ namespace PortAPIUI
             MessageBox.Show("Hi from Katie");
             string reportLocation = ExportResult.ExportApiResult("", ".json", true);
             string textFromFile = System.IO.File.ReadAllText(reportLocation);
+            JObject apiResult = JObject.Parse(textFromFile);
+            foreach (var target in apiResult["MissingDependencies"])
+            {
+                Debug.WriteLine(target);
+            }
 
-            string hello = "hello";
         }
     }
 }
