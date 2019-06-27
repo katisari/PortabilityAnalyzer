@@ -56,7 +56,9 @@ namespace MSBuildAnalyzer
                 };
             ProjectCollection pc = new ProjectCollection(dic, null, ToolsetDefinitionLocations.Default);
             var project = pc.LoadProject(CsProjPath);
+
             project.Build();
+
             configurations = project.ConditionedProperties[box1];
             platforms = project.ConditionedProperties[box2];
             var con = new string[0];
@@ -84,10 +86,13 @@ namespace MSBuildAnalyzer
                 var assembly = Assembly.LoadFrom(targetPathString);
                 foreach (AssemblyName assemblyName in assembly.GetReferencedAssemblies())
                 {
+
+                
                     Console.Write(" **" + Assembly.Load(assemblyName).Location);
                 }
                 Console.Write(" **" + assembly.Location);
             }
+
         }
     }
 }
