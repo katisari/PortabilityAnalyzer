@@ -26,8 +26,6 @@ namespace MSBuildAnalyzer
         {
             MSBuildLocator.RegisterDefaults();
             string CsProjPath = args[0];
-
-            //string CsProjPath = @"C:\Users\t-lilawr\source\repos\pracproj\pracproj.csproj";
             if (args.Length == 1)
             {
                 temp.MyMethod(CsProjPath);
@@ -54,14 +52,10 @@ namespace MSBuildAnalyzer
                     { box2, "AnyCPU" }
                 };
             ProjectCollection pc = new ProjectCollection(dic, null, ToolsetDefinitionLocations.Default);
-
             var project = pc.LoadProject(CsProjPath);
             project.Build();
-
             configurations = project.ConditionedProperties[box1];
             platforms = project.ConditionedProperties[box2];
-
-
             var con = new string[0];
             var pla = new string[0];
             Console.Write("Config:");
@@ -78,20 +72,19 @@ namespace MSBuildAnalyzer
                 Console.Write(" **" + plat);
             }
             Console.WriteLine(" ");
-            Console.Write("Assem:");
+            Console.Write("Assembly:");
             if (project.Properties.Any(n => n.Name == "TargetPath"))
             {
                 var mypath = System.Reflection.Assembly.GetEntryAssembly().Location;
                 var targetPath = project.GetProperty("TargetPath");
                 var targetPathString = targetPath.EvaluatedValue.ToString();
                 var assembly = Assembly.LoadFrom(targetPathString);
-                foreach (AssemblyName b in assembly.GetReferencedAssemblies())
+                foreach (AssemblyName assemblyName in assembly.GetReferencedAssemblies())
                 {
-                    Console.Write(" **" + b);
+                    Console.Write(" **" + Assembly.Load(assemblyName).Location);
                 }
-                Console.Write(" **" + assembly);
+                Console.Write(" **" + assembly.Location);
             }
-            //Console.ReadKey();
         }
     }
 }

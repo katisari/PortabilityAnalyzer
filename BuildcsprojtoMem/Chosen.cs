@@ -12,6 +12,7 @@ namespace BuildcsprojtoMem
     {
         public static void configure(string path, string config, string plat)
         {
+            AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", config);
             Dictionary<String, String> dic = new Dictionary<string, string>
                 {
                     { "Configuration", config },
@@ -24,22 +25,21 @@ namespace BuildcsprojtoMem
 
             if (project.IsBuildEnabled == true)
             {
-                Console.Write("Assem:");
+                Console.Write("Assembly:");
                 if (project.Properties.Any(n => n.Name == "TargetPath"))
                 {
                     var mypath = System.Reflection.Assembly.GetEntryAssembly().Location;
                     var targetPath = project.GetProperty("TargetPath");
+                    var exeName = project.GetProperty("TargetName");
+                 
                     var targetPathString = targetPath.EvaluatedValue.ToString();
                     var assembly = Assembly.LoadFrom(targetPathString);
-
-                    foreach (AssemblyName b in assembly.GetReferencedAssemblies())
+                    foreach (var dependent in assembly.GetReferencedAssemblies())
                     {
-                        Console.Write(" **" + b);
+                        Console.Write(" **" + Assembly.Load(dependent).Location); // get the path of b
                     }
-                    Console.Write(" **" + assembly);
+                    Console.Write(" **" + assembly.Location);
                 }
-
-                //   Console.ReadKey();
             }
         }
     }
