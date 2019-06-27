@@ -151,23 +151,13 @@ class MainViewModel : ViewModelBase
         ExportResult.InputPath = dialog.FileName;
 
         info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
-<<<<<<< HEAD
 
-        Config = output.Config;
-        Platform = output.Plat;
-        
-
-
-
-
-
-=======
  
         Config = output.Configuration;
         Platform = output.Platform;
         Assemblies = output.Assembly;
    
->>>>>>> 331be255e0deddbcf29e011029527a048a52f71a
+
     }
 
     private void ExecuteSaveFileDialog()
