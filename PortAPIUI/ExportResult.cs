@@ -68,7 +68,6 @@ namespace PortAPIUI
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     string text;
-
                     if (msg.Count != 17) // Was not successful
                     {
 
@@ -91,7 +90,6 @@ namespace PortAPIUI
                     else // Was successful
                     {
                     }
-
                 });
 
             };

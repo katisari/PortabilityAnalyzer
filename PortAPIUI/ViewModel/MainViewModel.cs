@@ -127,6 +127,7 @@ class MainViewModel : ViewModelBase
 
     private void AnalyzeAPI()
     {
+<<<<<<< HEAD
         //Assemblies = Rebuild.ChosenBuild(SelectedPath);
         List<string> assemblies = new List<string>();
 
@@ -136,6 +137,10 @@ class MainViewModel : ViewModelBase
                     AssemblyCollection.Add(new AssemblyModel(assembly));
                 }*/
         ApiAnalyzer.AnalyzeAssemblies(assemblies);
+=======
+        //_assemblies = Rebuild.ChosenBuild(SelectedPath);
+
+>>>>>>> 16d2c1d92c22f41e17faa8d7ab9bb410651c783a
     }
 
 
@@ -151,11 +156,24 @@ class MainViewModel : ViewModelBase
         dialog.ShowDialog();
         SelectedPath = dialog.FileName;
         ExportResult.InputPath = dialog.FileName;
+<<<<<<< HEAD
         Info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
         Config = output.Configuration;
         Platform = output.Platform;
         Assemblies = output.Assembly;
    
+=======
+     
+        //info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
+ 
+        //Config = output.Config;
+        //Platform = output.Plat;
+        //Assemblies = output.Asse;
+        
+        
+
+
+>>>>>>> 16d2c1d92c22f41e17faa8d7ab9bb410651c783a
 
     }
 
