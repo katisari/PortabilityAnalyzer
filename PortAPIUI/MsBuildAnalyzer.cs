@@ -49,12 +49,12 @@ namespace PortAPIUI
             }
         }
     }
-    public class info
+    public class Info
     {
         public List<string> Configuration { get; set; }
         public List<string> Platform { get; set; }
         public List<string> Assembly { get; set; }
-        public info(List<string> configuration, List<string> platform, List<string> assembly)
+        public Info(List<string> configuration, List<string> platform, List<string> assembly)
         {
             Configuration = configuration;
             Platform = platform;
@@ -64,7 +64,7 @@ namespace PortAPIUI
     class MsBuildAnalyzer
     {
         private static StringBuilder output = null;
-        public static PortAPIUI.info GetAssemblies(string path)
+        public static PortAPIUI.Info GetAssemblies(string path)
         {
             var ourPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             var ourDirectory = System.IO.Path.GetDirectoryName(ourPath);
@@ -101,7 +101,7 @@ namespace PortAPIUI
             {
                 assem.Add(_assemblies[i]);
             }
-            PortAPIUI.info info = new PortAPIUI.info(config, plat, assem);
+            PortAPIUI.Info info = new PortAPIUI.Info(config, plat, assem);
             return info;
         }
         private static void SortOutputHandler(object sendingProcess,

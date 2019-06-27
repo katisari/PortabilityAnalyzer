@@ -130,7 +130,7 @@ class MainViewModel : ViewModelBase
         SelectedPath = dialog.FileName;
         ExportResult.InputPath = dialog.FileName;
      
-        info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
+        Info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
  
         Config = output.Configuration;
         Platform = output.Platform;
