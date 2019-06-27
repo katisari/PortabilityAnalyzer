@@ -127,13 +127,15 @@ class MainViewModel : ViewModelBase
 
     private void AnalyzeAPI()
     {
-        Assemblies = Rebuild.ChosenBuild(SelectedPath);
-/*
-        foreach(var assembly in Assemblies)
-        {
-            AssemblyCollection.Add(new AssemblyModel(assembly));
-        }*/
-        ApiAnalyzer.AnalyzeAssemblies(Assemblies);
+        //Assemblies = Rebuild.ChosenBuild(SelectedPath);
+        List<string> assemblies = new List<string>();
+
+        /*
+                foreach(var assembly in Assemblies)
+                {
+                    AssemblyCollection.Add(new AssemblyModel(assembly));
+                }*/
+        ApiAnalyzer.AnalyzeAssemblies(assemblies);
     }
 
 
