@@ -12,7 +12,6 @@ namespace BuildcsprojtoMem
     {
         public static void configure(string path, string config, string plat)
         {
-            AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", config);
             Dictionary<String, String> dic = new Dictionary<string, string>
                 {
                     { "Configuration", config },
@@ -22,7 +21,6 @@ namespace BuildcsprojtoMem
 
             var project = pc.LoadProject(path);
             project.Build();
-
             if (project.IsBuildEnabled == true)
             {
                 Console.Write("Assembly:");

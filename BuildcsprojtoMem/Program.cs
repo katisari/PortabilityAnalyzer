@@ -30,7 +30,7 @@ namespace MSBuildAnalyzer
                 string CsProjPath = args[0];
                 if (args.Length == 1)
                 {
-                    temp.MyMethod(CsProjPath);
+                    Temp.MyMethod(CsProjPath);
                 }
                 if (args.Length > 1)
                 {
@@ -41,7 +41,7 @@ namespace MSBuildAnalyzer
             }
         }
     }
-    public class temp
+    public class Temp
     {
         public static List<string> configurations;
         public static List<String> platforms;
@@ -80,15 +80,13 @@ namespace MSBuildAnalyzer
             Console.Write("Assembly:");
             if (project.Properties.Any(n => n.Name == "TargetPath"))
             {
-                var mypath = System.Reflection.Assembly.GetEntryAssembly().Location;
+                var myPath = System.Reflection.Assembly.GetEntryAssembly().Location;
                 var targetPath = project.GetProperty("TargetPath");
                 var targetPathString = targetPath.EvaluatedValue.ToString();
                 var assembly = Assembly.LoadFrom(targetPathString);
-                foreach (AssemblyName assemblyName in assembly.GetReferencedAssemblies())
+                foreach (AssemblyName AssemblyName in assembly.GetReferencedAssemblies())
                 {
-
-                
-                    Console.Write(" **" + Assembly.Load(assemblyName).Location);
+                    Console.Write(" **" + Assembly.Load(AssemblyName).Location);
                 }
                 Console.Write(" **" + assembly.Location);
             }
