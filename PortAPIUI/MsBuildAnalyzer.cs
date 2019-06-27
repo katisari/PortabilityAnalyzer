@@ -12,139 +12,104 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Threading;
 
-
 namespace PortAPIUI
 {
     public static class Rebuild
     {
-        private static StringBuilder o = null;
-        public static List<string> ChosenBuild(String path) {
+        private static StringBuilder outputConsole = null;
+        public static List<string> ChosenBuild(String path)
+        {
             var ourPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             var ourDirectory = System.IO.Path.GetDirectoryName(ourPath);
             var AnalyzerPath = System.IO.Path.Combine(ourDirectory, "MSBuildAnalyzer\\BuildProj.exe");
             Process process = new Process();
             process.StartInfo.FileName = AnalyzerPath;
-            process.StartInfo.Arguments = $"{path} {MainViewModel._selectedConfig} {MainViewModel._selectedPlatform}";  
-            // Set UseShellExecute to false for redirection.
+            process.StartInfo.Arguments = $"{path} {MainViewModel._selectedConfig} {MainViewModel._selectedPlatform}";
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
-            // Read the sort output.
-            o = new StringBuilder();
+            outputConsole = new StringBuilder();
             process.OutputDataReceived += OutputHandler;
-            // Start the process.
             process.Start();
-            // Start read of the sort output stream.
             process.BeginOutputReadLine();
-            // Wait for the sort process to write the sorted text lines.
             process.WaitForExit();
             process.Close();
-
             List<string> assemblies = new List<string>();
-            var name = o.ToString();
-            var sec = name.Split(" **");
-            for(int i = 1; i < sec.Length; i++)
+            var splitAssembly = outputConsole.ToString().Split(" **");
+            for (int i = 1; i < splitAssembly.Length; i++)
             {
-                assemblies.Add(sec[i]);
+                assemblies.Add(splitAssembly[i]);
             }
             return assemblies;
         }
-        private static void OutputHandler(object sendingProcess,DataReceivedEventArgs line)
+        private static void OutputHandler(object sendingProcess, DataReceivedEventArgs line)
         {
             if (!String.IsNullOrEmpty(line.Data))
             {
-                o.Append(line.Data);
+                outputConsole.Append(line.Data);
             }
         }
     }
-
-
-
     public class info
     {
-        public List<string> Config { get; set; }
-        public List<string> Plat { get; set; }
-        public List<string> Asse { get; set; }
-        public info(List<string> config, List<string> plat, List<string> asse)
+        public List<string> Configuration { get; set; }
+        public List<string> Platform { get; set; }
+        public List<string> Assembly { get; set; }
+        public info(List<string> configuration, List<string> platform, List<string> assembly)
         {
-            Config = config;
-            Plat = plat;
-            Asse = asse; 
+            Configuration = configuration;
+            Platform = platform;
+            Assembly = assembly;
         }
     }
-
-    
     class MsBuildAnalyzer
     {
         private static StringBuilder output = null;
         public static PortAPIUI.info GetAssemblies(string path)
         {
-            // Initialize the process and its StartInfo properties.
             var ourPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             var ourDirectory = System.IO.Path.GetDirectoryName(ourPath);
             var AnalyzerPath = System.IO.Path.Combine(ourDirectory, "MSBuildAnalyzer\\BuildProj.exe");
-
             Process process = new Process();
             process.StartInfo.FileName = AnalyzerPath;
             process.StartInfo.Arguments = path;
-            // Set UseShellExecute to false for redirection.
             process.StartInfo.UseShellExecute = false;
-
-            // Redirect the standard output of the sort command.  
             process.StartInfo.RedirectStandardOutput = true;
             output = new StringBuilder();
-
-            // Read the sort output.
             process.OutputDataReceived += SortOutputHandler;
-
-            // Start the process.
             process.Start();
-
-            // Start read of the sort output stream.
             process.BeginOutputReadLine();
-
-            // Wait for the sort process to write the sorted text lines.
             process.WaitForExit();
-
             process.Close();
-
-            //output has all info
-            
-            var f = output.ToString();
-            var start = f.IndexOf("Plat:");
-            var end = f.IndexOf("Assem:");
-            var c = f.Substring(f.IndexOf("Config:"),start);
-            var co = c.Split(" **");
+            var ConsoleOutput = output.ToString();
+            var start = ConsoleOutput.IndexOf("Plat:");
+            var end = ConsoleOutput.IndexOf("Assembly:");
+            var _configurations = ConsoleOutput.Substring(ConsoleOutput.IndexOf("Config:"), start).Split(" **");
             List<string> config = new List<string>();
-            for(int i = 1; i < co.Length; i++)
+            for (int i = 1; i < _configurations.Length; i++)
             {
-                config.Add(co[i]);
+                config.Add(_configurations[i]);
             }
-            var p = f.Substring(start,end-start);
-            var po = p.Split(" **");
+            var _platforms = ConsoleOutput.Substring(start, end - start).Split(" **");
             List<string> plat = new List<string>();
-            for (int i = 1; i < po.Length; i++)
+            for (int i = 1; i < _platforms.Length; i++)
             {
-                plat.Add(po[i]);
+                plat.Add(_platforms[i]);
             }
-            var a = f.Substring(end);
-            var ao = a.Split(" **");
+            var _assemblies = ConsoleOutput.Substring(end).Split(" **");
             List<string> assem = new List<string>();
-            for (int i = 1; i < ao.Length; i++)
+            for (int i = 1; i < _assemblies.Length; i++)
             {
-                assem.Add(ao[i]);
+                assem.Add(_assemblies[i]);
             }
-            PortAPIUI.info info = new PortAPIUI.info(config,plat,assem);
-
+            PortAPIUI.info info = new PortAPIUI.info(config, plat, assem);
             return info;
         }
-
         private static void SortOutputHandler(object sendingProcess,
             DataReceivedEventArgs outLine)
         {
-            // Collect the sort command output.
             if (!String.IsNullOrEmpty(outLine.Data))
             {
-                    output.Append(outLine.Data);
+                output.Append(outLine.Data);
             }
         }
     }
