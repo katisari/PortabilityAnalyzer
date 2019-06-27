@@ -12,6 +12,7 @@ namespace BuildcsprojtoMem
     {
         public static void configure(string path, string config, string plat)
         {
+            AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", config);
             Dictionary<String, String> dic = new Dictionary<string, string>
                 {
                     { "Configuration", config },
@@ -20,24 +21,26 @@ namespace BuildcsprojtoMem
             ProjectCollection pc = new ProjectCollection(dic, null, ToolsetDefinitionLocations.Default);
 
             var project = pc.LoadProject(path);
+            project.Build();
 
-            Console.Write("Assem:");
-            if (project.Properties.Any(n => n.Name == "TargetPath"))
+            if (project.IsBuildEnabled == true)
             {
-                var mypath = System.Reflection.Assembly.GetEntryAssembly().Location;
-                var targetPath = project.GetProperty("TargetPath");
-                var targetPathString = targetPath.EvaluatedValue.ToString();
-                var assembly = Assembly.LoadFrom(targetPathString); 
-
-                foreach (AssemblyName b in assembly.GetReferencedAssemblies())
+                Console.Write("Assembly:");
+                if (project.Properties.Any(n => n.Name == "TargetPath"))
                 {
-                    Console.Write(" **" + b);
+                    var mypath = System.Reflection.Assembly.GetEntryAssembly().Location;
+                    var targetPath = project.GetProperty("TargetPath");
+                    var exeName = project.GetProperty("TargetName");
+                 
+                    var targetPathString = targetPath.EvaluatedValue.ToString();
+                    var assembly = Assembly.LoadFrom(targetPathString);
+                    foreach (var dependent in assembly.GetReferencedAssemblies())
+                    {
+                        Console.Write(" **" + Assembly.Load(dependent).Location); // get the path of b
+                    }
+                    Console.Write(" **" + assembly.Location);
                 }
-                Console.Write(" **" + assembly);
             }
-
-            //   Console.ReadKey();
-
         }
     }
 }

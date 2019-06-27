@@ -25,30 +25,26 @@ namespace MSBuildAnalyzer
         static void Main(string[] args)
         {
             MSBuildLocator.RegisterDefaults();
-            string CsProjPath = args[0];
-
-
-            //string CsProjPath = @"C:\Users\t-lilawr\source\repos\pracproj\pracproj.csproj";
-            if (args.Length == 1)
+            if (args.Length != 0)
             {
-                temp.MyMethod(CsProjPath);
-            }
-           
-            
-            if (args.Length > 1)
-            {
-                string ChosenConfig = args[1];
-                string ChosenPlat = args[2];
-                Chosen.configure(CsProjPath, ChosenConfig, ChosenPlat);
+                string CsProjPath = args[0];
+                if (args.Length == 1)
+                {
+                    temp.MyMethod(CsProjPath);
+                }
+                if (args.Length > 1)
+                {
+                    string ChosenConfig = args[1];
+                    string ChosenPlat = args[2];
+                    Chosen.configure(CsProjPath, ChosenConfig, ChosenPlat);
+                }
             }
         }
     }
     public class temp
     {
-      
         public static List<string> configurations;
         public static List<String> platforms;
-
         public static void MyMethod(string CsProjPath)
         {
             const string box1 = "Configuration";
@@ -56,63 +52,41 @@ namespace MSBuildAnalyzer
             Dictionary<String, String> dic = new Dictionary<string, string>
                 {
                     { box1, "Debug" },
-                    { box2, "AnyCPU" } 
+                    { box2, "AnyCPU" }
                 };
-            ProjectCollection pc = new ProjectCollection(dic, null, ToolsetDefinitionLocations.Default) ;
-
+            ProjectCollection pc = new ProjectCollection(dic, null, ToolsetDefinitionLocations.Default);
             var project = pc.LoadProject(CsProjPath);
             project.Build();
-
             configurations = project.ConditionedProperties[box1];
             platforms = project.ConditionedProperties[box2];
-
             var con = new string[0];
             var pla = new string[0];
-
-                Console.Write("Config:");
-                foreach(var config in configurations)
-                {
-                     con.Append(config);
-                    Console.Write(" **" + config );
-                }
-                Console.WriteLine(" ");
-                Console.Write("Plat:");
-                foreach (var plat in platforms)
-                {
-                     pla.Append(plat);
-                    Console.Write(" **"+ plat);
-                }
-
+            Console.Write("Config:");
+            foreach (var config in configurations)
+            {
+                con.Append(config);
+                Console.Write(" **" + config);
+            }
             Console.WriteLine(" ");
-            Console.Write("Assem:");
+            Console.Write("Plat:");
+            foreach (var plat in platforms)
+            {
+                pla.Append(plat);
+                Console.Write(" **" + plat);
+            }
+            Console.WriteLine(" ");
+            Console.Write("Assembly:");
             if (project.Properties.Any(n => n.Name == "TargetPath"))
             {
                 var mypath = System.Reflection.Assembly.GetEntryAssembly().Location;
                 var targetPath = project.GetProperty("TargetPath");
                 var targetPathString = targetPath.EvaluatedValue.ToString();
-                var assembly = Assembly.LoadFrom(targetPathString); 
-                foreach (AssemblyName b in assembly.GetReferencedAssemblies())
+                var assembly = Assembly.LoadFrom(targetPathString);
+                foreach (AssemblyName assemblyName in assembly.GetReferencedAssemblies())
                 {
-                    Console.Write(" **"+ b );
+                    Console.Write(" **" + Assembly.Load(assemblyName).Location);
                 }
-                Console.Write(" **" + assembly);
-            }
-
-            Console.ReadKey();
-            foreach (string q in pla)
-            {
-                foreach (string s in con)
-                {
-                    Dictionary<String, String> dictionary = new Dictionary<string, string>
-                {
-                    { box1, s },
-                    { box2, q }
-                };
-                    ProjectCollection collection = new ProjectCollection(dictionary, null, ToolsetDefinitionLocations.Default);
-
-                    var pro = collection.LoadProject(CsProjPath);
-                    pro.Build();
-                }
+                Console.Write(" **" + assembly.Location);
             }
         }
     }
