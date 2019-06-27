@@ -21,22 +21,15 @@ using System.ComponentModel;
 
 namespace PortAPIUI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             DataContext = new MainViewModel();
             InitializeComponent();
-           
-
-
         }
 
         // Opens hyperlink to Portablitity Analyzer documentation
-
         private void About_Click(object sender, RoutedEventArgs e)
 
         {
@@ -57,6 +50,7 @@ namespace PortAPIUI
             psi.UseShellExecute = true;
             Process.Start(psi);
         }
+
         // Enables export button, and table wehn analyze button is clicked 
         private void BStart_Click(object sender, RoutedEventArgs e)
         {
@@ -64,7 +58,8 @@ namespace PortAPIUI
             APIGrid.IsEnabled = true;
             AssemComboBox.IsEnabled = true;
         }
-        //Get rid of IsInDesignMode Column
+
+        //Removes IsInDesignMode Column from datagrid
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             PropertyDescriptor propertyDescriptor = (PropertyDescriptor)e.PropertyDescriptor;
@@ -73,6 +68,15 @@ namespace PortAPIUI
             {
                 e.Cancel = true;
             }
+        }
+
+        //Populates datagrid based on selected assembly 
+        private void AssemComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var vm = this.DataContext as MainViewModel;
+            var assem = vm.SelectedAssembly;
+            vm.AssemblyCollectionUpdate(assem);
+
         }
     }
 }

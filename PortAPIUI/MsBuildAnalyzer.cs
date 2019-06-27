@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -60,7 +60,7 @@ namespace PortAPIUI
         public List<string> Assembly { get; set; }
         public info(List<string> configuration, List<string> platform, List<string> assembly)
         {
-   Configuration = configuration;
+            Configuration = configuration;
             Platform = platform;
             Assembly = assembly;
         }

@@ -49,15 +49,14 @@
         <StackPanel  Grid.Row="2" Grid.Column="0" Orientation="Vertical" Margin="10"  >
             <StackPanel Orientation="Vertical"  >
                 <Label  Content="Choose Assemblies: " />
-                <ComboBox  x:Name="AssemComboBox" IsEnabled="False"  SelectedItem="{Binding SelectedAssembly}" ItemsSource="{Binding Assemblies}"  />
+                <ComboBox  x:Name="AssemComboBox" IsEnabled="False"  SelectedItem="{Binding SelectedAssembly}" ItemsSource="{Binding Assemblies}" SelectionChanged="AssemComboBox_SelectionChanged"  />
             </StackPanel>
 
-            <DataGrid IsEnabled="False"  x:Name="APIGrid" Grid.Row="2" Grid.Column="0"  BorderBrush="#FFABADB3" Margin="0,10,0,0"   >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="API" Width="*" FontFamily="Segoe UI"/>
-                    <DataGridTextColumn Header="Compatibility" Width="*"/>
-                    <DataGridCheckBoxColumn Header="Version" Width="*"/>
-                    <DataGridTextColumn Header="Additional Info" Width="*"/>
+            <DataGrid IsEnabled="False"  x:Name="APIGrid" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" BorderBrush="#FFABADB3" Margin="0,10,0,0"  ItemsSource="{Binding Path= AssemblyCollection}" >
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="API" Width="*" Binding="{Binding APIName}" />
+                    <DataGridCheckBoxColumn Header="Compatibility" Width="*" IsReadOnly="True" Binding="{Binding Compatibility}"/>
+
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
