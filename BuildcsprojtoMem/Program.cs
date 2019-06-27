@@ -25,16 +25,19 @@ namespace MSBuildAnalyzer
         static void Main(string[] args)
         {
             MSBuildLocator.RegisterDefaults();
-            string CsProjPath = args[0];
-            if (args.Length == 1)
+            if (args.Length != 0)
             {
-                temp.MyMethod(CsProjPath);
-            }
-            if (args.Length > 1)
-            {
-                string ChosenConfig = args[1];
-                string ChosenPlat = args[2];
-                Chosen.configure(CsProjPath, ChosenConfig, ChosenPlat);
+                string CsProjPath = args[0];
+                if (args.Length == 1)
+                {
+                    temp.MyMethod(CsProjPath);
+                }
+                if (args.Length > 1)
+                {
+                    string ChosenConfig = args[1];
+                    string ChosenPlat = args[2];
+                    Chosen.configure(CsProjPath, ChosenConfig, ChosenPlat);
+                }
             }
         }
     }
