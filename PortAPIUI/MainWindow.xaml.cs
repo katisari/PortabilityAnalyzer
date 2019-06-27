@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+using System.ComponentModel;
 
 namespace PortAPIUI
 {
@@ -29,8 +30,12 @@ namespace PortAPIUI
         {
             DataContext = new MainViewModel();
             InitializeComponent();
-            
+           
+
+
         }
+
+        // Opens hyperlink to Portablitity Analyzer documentation
 
         private void About_Click(object sender, RoutedEventArgs e)
 
@@ -42,6 +47,7 @@ namespace PortAPIUI
             Process.Start(psi);
         }
 
+        // Opens hyperlink to Microsoft Privacy Statement
         private void Privacy_Click(object sender, RoutedEventArgs e)
 
         {
@@ -51,12 +57,22 @@ namespace PortAPIUI
             psi.UseShellExecute = true;
             Process.Start(psi);
         }
-
+        // Enables export button, and table wehn analyze button is clicked 
         private void BStart_Click(object sender, RoutedEventArgs e)
         {
             ExportBtn.IsEnabled = true;
-            API.IsEnabled = true;
-            Assembly.IsEnabled = true;
+            APIGrid.IsEnabled = true;
+            AssemComboBox.IsEnabled = true;
+        }
+        //Get rid of IsInDesignMode Column
+        private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            PropertyDescriptor propertyDescriptor = (PropertyDescriptor)e.PropertyDescriptor;
+            e.Column.Header = propertyDescriptor.DisplayName;
+            if (propertyDescriptor.DisplayName == "IsInDesignMode")
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
