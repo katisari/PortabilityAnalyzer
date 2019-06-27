@@ -5,11 +5,12 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text;
 
-namespace PortAPIUI.Model
+namespace PortAPIUI.ViewModel
 {
-    internal class AssemblyModel : ViewModelBase
+    internal class ApiViewModel : ViewModelBase
     {
-        private string _name;
+        public string _name;
+        public Boolean _compatibility;
 
 
         public override string ToString()
@@ -17,7 +18,7 @@ namespace PortAPIUI.Model
             return _name;
         }
 
-        public AssemblyModel(string assembly)
+        public ApiViewModel(string assembly)
         {
             _name = assembly;
         }

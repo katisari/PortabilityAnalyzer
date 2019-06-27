@@ -2,7 +2,6 @@
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using PortAPIUI;
-using PortAPIUI.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,7 +28,9 @@ class MainViewModel : ViewModelBase
     public static string _selectedConfig;
     public static string _selectedPlatform;
 
-    public ObservableCollection<AssemblyModel> AssemblyCollection { get; set; } = new ObservableCollection<AssemblyModel>();
+   // public ObservableCollection<AssemblyModel> AssemblyCollection { get; set; } = new ObservableCollection<AssemblyModel>();
+
+    public static string _selectedAssembly;
 
     public string SelectedPath
     {
@@ -91,6 +92,15 @@ class MainViewModel : ViewModelBase
         }
     }
 
+    public string SelectedAssembly
+    {
+        get { return _selectedAssembly; }
+        set
+        {
+            _selectedAssembly = value;
+            RaisePropertyChanged("SelectedAssembly");
+        }
+    }
     public MainViewModel()
     {
         RegisterCommands();
@@ -118,11 +128,12 @@ class MainViewModel : ViewModelBase
     private void AnalyzeAPI()
     {
         Assemblies = Rebuild.ChosenBuild(SelectedPath);
-
+/*
         foreach(var assembly in Assemblies)
         {
             AssemblyCollection.Add(new AssemblyModel(assembly));
-        }
+        }*/
+        ApiAnalyzer.AnalyzeAssemblies(Assemblies);
     }
 
 

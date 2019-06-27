@@ -17,7 +17,6 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
-using PortAPIUI.Model;
 using System.ComponentModel;
 
 namespace PortAPIUI
@@ -31,7 +30,7 @@ namespace PortAPIUI
         {
             DataContext = new MainViewModel();
             InitializeComponent();
-           // AssemblyGrid.ItemsSource = MainViewModel.GetAssemblies();
+           
 
 
         }
