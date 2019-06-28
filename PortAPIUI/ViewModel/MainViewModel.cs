@@ -28,7 +28,7 @@ class MainViewModel : ViewModelBase
     public static string _selectedConfig;
     public static string _selectedPlatform;
 
-   // public ObservableCollection<AssemblyModel> AssemblyCollection { get; set; } = new ObservableCollection<AssemblyModel>();
+    // public ObservableCollection<AssemblyModel> AssemblyCollection { get; set; } = new ObservableCollection<AssemblyModel>();
 
     public static string _selectedAssembly;
 
@@ -127,20 +127,18 @@ class MainViewModel : ViewModelBase
 
     private void AnalyzeAPI()
     {
-<<<<<<< HEAD
-        //Assemblies = Rebuild.ChosenBuild(SelectedPath);
-        List<string> assemblies = new List<string>();
 
-        /*
-                foreach(var assembly in Assemblies)
-                {
-                    AssemblyCollection.Add(new AssemblyModel(assembly));
-                }*/
-        ApiAnalyzer.AnalyzeAssemblies(assemblies);
-=======
-        //_assemblies = Rebuild.ChosenBuild(SelectedPath);
+        Assemblies = Rebuild.ChosenBuild(SelectedPath);
+        //List<string> assemblies = new List<string>();
 
->>>>>>> 16d2c1d92c22f41e17faa8d7ab9bb410651c783a
+        ///*
+        //        foreach(var assembly in Assemblies)
+        //        {
+        //            AssemblyCollection.Add(new AssemblyModel(assembly));
+        //        }*/
+        //ApiAnalyzer.AnalyzeAssemblies(assemblies);
+
+
     }
 
 
@@ -156,24 +154,13 @@ class MainViewModel : ViewModelBase
         dialog.ShowDialog();
         SelectedPath = dialog.FileName;
         ExportResult.InputPath = dialog.FileName;
-<<<<<<< HEAD
+
         Info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
         Config = output.Configuration;
         Platform = output.Platform;
         Assemblies = output.Assembly;
-   
-=======
-     
-        //info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
- 
-        //Config = output.Config;
-        //Platform = output.Plat;
-        //Assemblies = output.Asse;
-        
-        
 
 
->>>>>>> 16d2c1d92c22f41e17faa8d7ab9bb410651c783a
 
     }
 
