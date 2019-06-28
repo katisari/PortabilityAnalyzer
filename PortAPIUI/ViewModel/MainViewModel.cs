@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Newtonsoft.Json.Linq;
 
 class MainViewModel : ViewModelBase
 {
@@ -28,7 +29,7 @@ class MainViewModel : ViewModelBase
     public static string _selectedConfig;
     public static string _selectedPlatform;
 
-   // public ObservableCollection<AssemblyModel> AssemblyCollection { get; set; } = new ObservableCollection<AssemblyModel>();
+    // public ObservableCollection<AssemblyModel> AssemblyCollection { get; set; } = new ObservableCollection<AssemblyModel>();
 
     public static string _selectedAssembly;
 
@@ -127,13 +128,18 @@ class MainViewModel : ViewModelBase
 
     private void AnalyzeAPI()
     {
+
         Assemblies = Rebuild.ChosenBuild(SelectedPath);
-/*
-        foreach(var assembly in Assemblies)
-        {
-            AssemblyCollection.Add(new AssemblyModel(assembly));
-        }*/
-        ApiAnalyzer.AnalyzeAssemblies(Assemblies);
+        //List<string> assemblies = new List<string>();
+
+        ///*
+        //        foreach(var assembly in Assemblies)
+        //        {
+        //            AssemblyCollection.Add(new AssemblyModel(assembly));
+        //        }*/
+        JArray apiCompatibilityArray = ApiAnalyzer.AnalyzeAssemblies(Assemblies);
+
+
     }
 
 
@@ -149,11 +155,13 @@ class MainViewModel : ViewModelBase
         dialog.ShowDialog();
         SelectedPath = dialog.FileName;
         ExportResult.InputPath = dialog.FileName;
+
         Info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
         Config = output.Configuration;
         Platform = output.Platform;
         Assemblies = output.Assembly;
-   
+
+
 
     }
 
@@ -167,7 +175,7 @@ class MainViewModel : ViewModelBase
         if (result == true)
         {
             string fileExtension = Path.GetExtension(savedialog.FileName);
-            ExportResult.ExportApiResult(savedialog.FileName, fileExtension);
+            ExportResult.ExportApiResult(savedialog.FileName, fileExtension, false);
         }
 
     }
