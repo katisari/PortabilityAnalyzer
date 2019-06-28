@@ -151,15 +151,25 @@ class MainViewModel : ViewModelBase
         var dialog = new Microsoft.Win32.OpenFileDialog();
         dialog.Filter = "Project File (*.csproj)|*.csproj|All files (*.*)|*.*";
         dialog.InitialDirectory = @"C:\";
-        dialog.ShowDialog();
-        SelectedPath = dialog.FileName;
-        ExportResult.InputPath = dialog.FileName;
+       
+        Nullable<bool> result = dialog.ShowDialog();
+        if (result == true)
+        {
+            SelectedPath = dialog.FileName;
+        }
+        else {SelectedPath = null; }
+
+        if (SelectedPath != null)
+        {
+
+         ExportResult.InputPath = SelectedPath;
 
         info output = MsBuildAnalyzer.GetAssemblies(SelectedPath);
 
         Config = output.Configuration;
         Platform = output.Platform;
         Assemblies = output.Assembly;
+        }
     }
 
     private void ExecuteSaveFileDialog()
