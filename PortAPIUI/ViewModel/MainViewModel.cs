@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Newtonsoft.Json.Linq;
 
 class MainViewModel : ViewModelBase
 {
@@ -136,7 +137,7 @@ class MainViewModel : ViewModelBase
         //        {
         //            AssemblyCollection.Add(new AssemblyModel(assembly));
         //        }*/
-        //ApiAnalyzer.AnalyzeAssemblies(assemblies);
+        JArray apiCompatibilityArray = ApiAnalyzer.AnalyzeAssemblies(Assemblies);
 
 
     }
